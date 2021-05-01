@@ -9,7 +9,7 @@ import java.util.Collection;
 @RestController
 public class BookController {
 
-    @RequestMapping(path = "/books", method = RequestMethod.GET)
+    @GetMapping("/books")
     public Collection<BookDTO> getBooks() {
         var list = new ArrayList<BookDTO>();
         var book1 = new BookDTO();
@@ -28,7 +28,7 @@ public class BookController {
         return list;
     }
 
-    @RequestMapping(path = "/books/{id}", method = RequestMethod.GET)
+    @GetMapping("/books/{id}")
     public BookDTO getBook(@PathVariable long id) {
         var book1 = new BookDTO();
         book1.setAuthor("Wiktorollo");
