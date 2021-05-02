@@ -18,7 +18,7 @@ public class DynamoDBConfiguration {
     @Value("${aws.dynamodb.endpoint}")
     private String endpoint;
 
-    @Value("${aws.accessKey}")
+    @Value("${aws.accessKeyId}")
     private String accessKey;
 
     @Value("${aws.secretKey}")
