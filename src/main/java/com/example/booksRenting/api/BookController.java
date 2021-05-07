@@ -16,7 +16,7 @@ public class BookController {
 
     @GetMapping("/{id}")
     public BookDTO getBook(@PathVariable String id) {
-        return this.bookService.findById(id);
+        return this.bookService.findByPk(id);
     }
 
     @PostMapping

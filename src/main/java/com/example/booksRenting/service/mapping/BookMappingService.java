@@ -7,18 +7,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookMappingService {
     public BookDTO mapToBookDTO(Book book) {
-        return BookDTO.builder()
-                .title(book.getTitle())
-                .author(book.getAuthor())
-                .id(book.getId())
-                .build();
+        var result = new BookDTO();
+        result.setTitle(book.getTitle());
+        result.setAuthor(book.getAuthor());
+        result.setPk(book.getPk());
+        return result;
     }
 
-    public Book mapToBook(BookDTO bookDTO) {
-        return Book.builder()
-                .id(bookDTO.getId())
-                .author(bookDTO.getAuthor())
-                .title(bookDTO.getTitle())
-                .build();
+    public Book mapToBook(BookDTO book) {
+        var result = new Book();
+        result.setTitle(book.getTitle());
+        result.setAuthor(book.getAuthor());
+        result.setPk(book.getPk());
+        return result;
     }
 }

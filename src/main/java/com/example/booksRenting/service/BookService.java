@@ -4,6 +4,12 @@ import com.example.booksRenting.dto.BookDTO;
 import com.example.booksRenting.repository.BookRepository;
 import com.example.booksRenting.service.mapping.BookMappingService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+import static com.example.booksRenting.constants.TableConstants.*;
 
 @Service
 public class BookService {
@@ -15,13 +21,14 @@ public class BookService {
         this.bookMappingService = bookMappingService;
     }
 
-    public BookDTO findById(String id) {
-        var book = this.bookRepository.findById(id).orElseThrow(() -> new RuntimeException("not found"));
-        return this.bookMappingService.mapToBookDTO(book);
+    public BookDTO findByPk(String pk) {
+        var book = bookRepository.findByPkAndSk(pk, SORT_KEY_BOOK).orElseThrow();
+        return bookMappingService.mapToBookDTO(book);
     }
 
     public BookDTO createBook(BookDTO bookDTO) {
-        var book = this.bookRepository.save(bookMappingService.mapToBook(bookDTO));
-        return this.bookMappingService.mapToBookDTO(book);
+        var book = bookMappingService.mapToBook(bookDTO);
+        book.setSk(SORT_KEY_BOOK);
+        return bookMappingService.mapToBookDTO(bookRepository.save(book));
     }
 }
