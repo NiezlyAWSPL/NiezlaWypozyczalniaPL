@@ -64,4 +64,10 @@ public class RentalService {
                 .stream().map(bookMappingService::mapToBookDTO)
                 .collect(Collectors.toList());
     }
+
+    public List<BookDTO> getUserRentals(String user) {
+        return bookRepository.findByUserId(user).stream()
+                .map(b -> bookMappingService.mapToBookDTO(b))
+                .collect(Collectors.toList());
+    }
 }

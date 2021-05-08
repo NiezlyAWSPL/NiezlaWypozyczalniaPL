@@ -2,10 +2,8 @@ package com.example.booksRenting.repository;
 
 import com.example.booksRenting.model.entity.BaseEntity;
 import com.example.booksRenting.model.entity.Book;
-import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
@@ -15,4 +13,6 @@ public interface BookRepository extends PagingAndSortingRepository<Book, BaseEnt
     Optional<Book> findByPkAndSk(String pk, String sk);
 
     Page<Book> findByPkAndSkStartsWith(String pk, String skPrefix, Pageable pageable);
+
+    List<Book> findByUserId(String userId);
 }
