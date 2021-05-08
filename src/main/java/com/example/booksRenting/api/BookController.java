@@ -1,6 +1,7 @@
 package com.example.booksRenting.api;
 
 import com.example.booksRenting.dto.BookDTO;
+import com.example.booksRenting.dto.book.CreateBookRequestDTO;
 import com.example.booksRenting.service.BookService;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class BookController {
     }
 
     @PostMapping
-    public BookDTO createBook(@RequestBody BookDTO bookDTO) {
+    public BookDTO createBook(@RequestBody CreateBookRequestDTO bookDTO) {
         return this.bookService.createBook(bookDTO);
     }
 }

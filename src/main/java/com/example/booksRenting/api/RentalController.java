@@ -6,6 +6,8 @@ import com.example.booksRenting.dto.rental.ReturnBookRequestDTO;
 import com.example.booksRenting.service.RentalService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/books/rented")
 public class RentalController {
@@ -24,5 +26,10 @@ public class RentalController {
     @PostMapping("/return")
     public BookDTO returnBook(@RequestBody ReturnBookRequestDTO requestDTO) {
         return rentalService.returnBook(requestDTO.getPk());
+    }
+
+    @GetMapping("/{pk}")
+    public List<BookDTO> getBookRentals(@PathVariable String pk, @RequestParam("skip") int skip, @RequestParam("take") int take) {
+        return rentalService.getBookRentals(pk, skip, take);
     }
 }

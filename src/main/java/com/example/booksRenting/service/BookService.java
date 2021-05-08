@@ -1,6 +1,7 @@
 package com.example.booksRenting.service;
 
 import com.example.booksRenting.dto.BookDTO;
+import com.example.booksRenting.dto.book.CreateBookRequestDTO;
 import com.example.booksRenting.repository.BookRepository;
 import com.example.booksRenting.service.mapping.BookMappingService;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class BookService {
         return bookMappingService.mapToBookDTO(book);
     }
 
-    public BookDTO createBook(BookDTO bookDTO) {
+    public BookDTO createBook(CreateBookRequestDTO bookDTO) {
         var book = bookMappingService.mapToBook(bookDTO);
         book.setSk(SORT_KEY_BOOK);
         return bookMappingService.mapToBookDTO(bookRepository.save(book));
