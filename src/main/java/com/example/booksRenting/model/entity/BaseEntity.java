@@ -33,6 +33,7 @@ public abstract class BaseEntity {
     }
 
     @DynamoDBRangeKey(attributeName = "sk")
+    @DynamoDBIndexRangeKey(globalSecondaryIndexName = "userId")
     public String getSk() {
         return id.getSk();
     }

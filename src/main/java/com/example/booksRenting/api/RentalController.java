@@ -7,6 +7,7 @@ import com.example.booksRenting.service.RentalService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.util.List;
 
 @RestController
@@ -34,8 +35,12 @@ public class RentalController {
         return rentalService.getBookRentals(pk, skip, take);
     }
 
-    @GetMapping
-    public List<BookDTO> getUserRentals(@RequestParam("user") @NotNull String user) {
-        return rentalService.getUserRentals(user);
+    @GetMapping()
+    public List<BookDTO> getUserCurrentRentals(@RequestParam("user") @NotNull String user) {
+        return rentalService.getUserCurrentRentals(user);
+    }
+    @GetMapping("/old")
+    public List<BookDTO> getUserOldRentals(@RequestParam("user") @NotNull String user) {
+        return rentalService.getUserOldRentals(user);
     }
 }

@@ -65,9 +65,15 @@ public class RentalService {
                 .collect(Collectors.toList());
     }
 
-    public List<BookDTO> getUserRentals(String user) {
-        return bookRepository.findByUserId(user).stream()
-                .map(b -> bookMappingService.mapToBookDTO(b))
+    public List<BookDTO> getUserOldRentals(String user) {
+        return bookRepository.findByUserIdAndSkStartsWith(user, SORT_KEY_RENTAL_PREFIX + "#").stream()
+                .map(bookMappingService::mapToBookDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<BookDTO> getUserCurrentRentals(String user) {
+        return bookRepository.findByUserIdAndSkStartsWith(user, SORT_KEY_BOOK).stream()
+                .map(bookMappingService::mapToBookDTO)
                 .collect(Collectors.toList());
     }
 }
