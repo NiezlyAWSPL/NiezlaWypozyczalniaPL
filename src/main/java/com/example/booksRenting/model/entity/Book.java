@@ -19,7 +19,6 @@ public class Book extends BaseEntity{
     @DynamoDBAttribute
     private String libraryId;
 
-    //TODO Sprawdzic czy faktycznie index jest uzywany
     @DynamoDBIndexHashKey(globalSecondaryIndexName = "userId")
     @DynamoDBAttribute
     private String userId;
