@@ -5,8 +5,6 @@ import com.example.booksRenting.dto.book.CreateBookRequestDTO;
 import com.example.booksRenting.model.entity.Book;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
 @Service
 public class BookMappingService {
     public BookDTO mapToBookDTO(Book book) {

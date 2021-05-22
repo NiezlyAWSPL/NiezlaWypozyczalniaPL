@@ -8,7 +8,14 @@ import java.time.LocalDateTime;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@DynamoDBTable(tableName = "books")
 public class Book extends BaseEntity{
+
+    @Override
+    @DynamoDBIndexRangeKey(globalSecondaryIndexName = "userId")
+    public String getSk() {
+        return super.getSk();
+    }
 
     @DynamoDBAttribute
     private String title;

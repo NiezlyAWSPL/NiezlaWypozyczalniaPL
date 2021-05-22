@@ -15,4 +15,6 @@ public interface BookRepository extends PagingAndSortingRepository<Book, BaseEnt
     Page<Book> findByPkAndSkStartsWith(String pk, String skPrefix, Pageable pageable);
 
     List<Book> findByUserIdAndSkStartsWith(String userId, String skPrefix);
+
+
 }

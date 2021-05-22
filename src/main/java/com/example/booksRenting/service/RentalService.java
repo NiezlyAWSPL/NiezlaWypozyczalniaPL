@@ -3,16 +3,13 @@ package com.example.booksRenting.service;
 import com.example.booksRenting.dto.BookDTO;
 import com.example.booksRenting.repository.BookRepository;
 import com.example.booksRenting.service.mapping.BookMappingService;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.example.booksRenting.constants.TableConstants.*;
@@ -73,6 +70,7 @@ public class RentalService {
 
     public List<BookDTO> getUserCurrentRentals(String user) {
         return bookRepository.findByUserIdAndSkStartsWith(user, SORT_KEY_BOOK).stream()
+                .filter(b -> b.getStatus().equals(BOOK_RENTED_STATUS))
                 .map(bookMappingService::mapToBookDTO)
                 .collect(Collectors.toList());
     }

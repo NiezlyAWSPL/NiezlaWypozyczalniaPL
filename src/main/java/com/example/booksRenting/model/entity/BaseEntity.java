@@ -2,12 +2,10 @@ package com.example.booksRenting.model.entity;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
-@DynamoDBTable(tableName = "books") //TODO Dynamiczna nazwa tabeli
+
+@DynamoDBTable(tableName = "books")
 public abstract class BaseEntity {
 
     @Data
@@ -33,7 +31,6 @@ public abstract class BaseEntity {
     }
 
     @DynamoDBRangeKey(attributeName = "sk")
-    @DynamoDBIndexRangeKey(globalSecondaryIndexName = "userId")
     public String getSk() {
         return id.getSk();
     }
