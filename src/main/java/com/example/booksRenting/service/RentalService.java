@@ -1,8 +1,11 @@
 package com.example.booksRenting.service;
 
 import com.example.booksRenting.dto.BookDTO;
+import com.example.booksRenting.dto.RentalDTO;
 import com.example.booksRenting.repository.BookRepository;
+import com.example.booksRenting.repository.RentalRepository;
 import com.example.booksRenting.service.mapping.BookMappingService;
+import com.example.booksRenting.service.mapping.RentalMappingService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -17,11 +20,15 @@ import static com.example.booksRenting.constants.TableConstants.*;
 @Service
 public class RentalService {
     private final BookRepository bookRepository;
+    private final RentalRepository rentalRepository;
     private final BookMappingService bookMappingService;
+    private final RentalMappingService rentalMappingService;
 
-    public RentalService(BookRepository bookRepository, BookMappingService bookMappingService) {
+    public RentalService(BookRepository bookRepository, RentalRepository rentalRepository, BookMappingService bookMappingService, RentalMappingService rentalMappingService) {
         this.bookRepository = bookRepository;
+        this.rentalRepository = rentalRepository;
         this.bookMappingService = bookMappingService;
+        this.rentalMappingService = rentalMappingService;
     }
 
     @Transactional
@@ -34,41 +41,38 @@ public class RentalService {
     }
 
     @Transactional
-    public BookDTO returnBook(String pk) {
+    public RentalDTO returnBook(String pk) {
         var book = bookRepository.findByPkAndSk(pk, SORT_KEY_BOOK).orElseThrow();
+        var rental = rentalMappingService.mapToRental(book);
 
-        var userId = book.getUserId();
         book.setUserId(null);
-        var rentedDate = book.getRentedDate();
         book.setRentedDate(null);
         book.setStatus(BOOK_AVAILABLE_STATUS);
         bookRepository.save(book);
 
-        book.setUserId(userId);
-        book.setRentedDate(rentedDate);
-        book.setReturnDate(LocalDateTime.now());
-        book.setSk(SORT_KEY_RENTAL_PREFIX + "#" + LocalDateTime.now());
-        var result = bookRepository.save(book);
+        rental.setReturnDate(LocalDateTime.now());
+        rental.setSk(SORT_KEY_RENTAL_PREFIX + "#" + LocalDateTime.now());
+        var result = rentalRepository.save(rental);
 
-        return bookMappingService.mapToBookDTO(result);
+        return rentalMappingService.mapToRentalDTO(result);
     }
 
-    public List<BookDTO> getBookRentals(String pk, int skip, int take) {
+    public List<RentalDTO> getBookRentals(String pk, int skip, int take) {
         int pageNumber = skip / take;
 
-        return bookRepository.findByPkAndSkStartsWith(pk, SORT_KEY_RENTAL_PREFIX + "#",
+        return rentalRepository.findByPkAndSkStartsWith(pk, SORT_KEY_RENTAL_PREFIX + "#",
                 PageRequest.of(pageNumber, take, Sort.by("sk").descending()))
-                .stream().map(bookMappingService::mapToBookDTO)
+                .stream().map(rentalMappingService::mapToRentalDTO)
                 .collect(Collectors.toList());
     }
 
-    public List<BookDTO> getUserOldRentals(String user) {
-        return bookRepository.findByUserIdAndSkStartsWith(user, SORT_KEY_RENTAL_PREFIX + "#").stream()
-                .map(bookMappingService::mapToBookDTO)
+    public List<RentalDTO> getUserOldRentals(String user) {
+        return rentalRepository.findByUserIdAndSkStartsWith(user, SORT_KEY_RENTAL_PREFIX + "#").stream()
+                .map(rentalMappingService::mapToRentalDTO)
                 .collect(Collectors.toList());
     }
 
-    public List<BookDTO> getUserCurrentRentals(String user) {
+    public List<BookDTO> getCurrentRentedBookByUser(String user) {
         return bookRepository.findByUserIdAndSkStartsWith(user, SORT_KEY_BOOK).stream()
                 .filter(b -> b.getStatus().equals(BOOK_RENTED_STATUS))
                 .map(bookMappingService::mapToBookDTO)

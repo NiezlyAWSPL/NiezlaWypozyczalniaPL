@@ -5,15 +5,12 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class BookDTO {
+public class RentalDTO {
     private String pk;
-    private String bookDefinitionId;
     private String author;
     private String title;
     private String libraryId;
     private String userId;
-    private String status;
     private LocalDateTime rentedDate;
-    private LocalDateTime reservationBeginDate;
-    private LocalDateTime reservationExpireDate;
+    private LocalDateTime returnDate;
 }

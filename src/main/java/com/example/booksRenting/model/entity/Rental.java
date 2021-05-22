@@ -2,14 +2,15 @@ package com.example.booksRenting.model.entity;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import com.example.booksRenting.model.converters.LocalDateTimeConverter;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @DynamoDBTable(tableName = "books")
-public class Book extends BaseEntity{
+public class Rental extends BaseEntity{
 
     @Override
     @DynamoDBIndexRangeKey(globalSecondaryIndexName = "userId")
@@ -39,17 +40,10 @@ public class Book extends BaseEntity{
     private String userId;
 
     @DynamoDBAttribute
-    private String status;
-
-    @DynamoDBAttribute
     @DynamoDBTypeConverted(converter = LocalDateTimeConverter.class)
     private LocalDateTime rentedDate;
-
     @DynamoDBAttribute
     @DynamoDBTypeConverted(converter = LocalDateTimeConverter.class)
-    private LocalDateTime reservationBeginDate;
-    @DynamoDBAttribute
-    @DynamoDBTypeConverted(converter = LocalDateTimeConverter.class)
-    private LocalDateTime reservationExpireDate;
+    private LocalDateTime returnDate;
 
 }

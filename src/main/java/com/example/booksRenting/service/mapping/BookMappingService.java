@@ -12,11 +12,11 @@ public class BookMappingService {
         result.setTitle(book.getTitle());
         result.setAuthor(book.getAuthor());
         result.setPk(book.getPk());
+        result.setBookDefinitionId(book.getBookDefinitionId());
         result.setLibraryId(book.getLibraryId());
         result.setUserId(book.getUserId());
         result.setStatus(book.getStatus());
         result.setRentedDate(book.getRentedDate());
-        result.setReturnDate(book.getReturnDate());
         result.setReservationBeginDate(book.getReservationBeginDate());
         result.setReservationExpireDate(book.getReservationExpireDate());
         return result;
