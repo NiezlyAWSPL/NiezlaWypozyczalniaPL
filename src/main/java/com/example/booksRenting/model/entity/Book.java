@@ -13,6 +13,7 @@ public class Book extends BaseEntity{
 
     @Override
     @DynamoDBIndexRangeKey(globalSecondaryIndexName = "userId")
+    @DynamoDBRangeKey(attributeName = "sk")
     public String getSk() {
         return super.getSk();
     }
@@ -23,7 +24,7 @@ public class Book extends BaseEntity{
 
     @DynamoDBAttribute
     @DynamoDBIndexRangeKey(globalSecondaryIndexName = "bookDefinitionId")
-    private String statusReservationExpireDate;
+    private long reservedTillTimeStamp = 0;
 
     @DynamoDBAttribute
     private String title;

@@ -30,7 +30,6 @@ public abstract class BaseEntity {
         id.setPk(pk);
     }
 
-    @DynamoDBRangeKey(attributeName = "sk")
     public String getSk() {
         return id.getSk();
     }

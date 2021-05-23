@@ -24,4 +24,9 @@ public class BookController {
     public BookDTO createBook(@RequestBody CreateBookRequestDTO bookDTO) {
         return this.bookService.createBook(bookDTO);
     }
+
+    @GetMapping
+    public BookDTO getFirstAvailableByBookDefinition(@RequestParam("bookDefinitionId") String bookDefinitionId) {
+        return bookService.findFirstAvailableByBookDefinitionId(bookDefinitionId);
+    }
 }

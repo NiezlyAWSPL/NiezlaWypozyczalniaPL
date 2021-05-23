@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 public class Rental extends BaseEntity{
 
     @Override
+    @DynamoDBRangeKey(attributeName = "sk")
     @DynamoDBIndexRangeKey(globalSecondaryIndexName = "userId")
     public String getSk() {
         return super.getSk();

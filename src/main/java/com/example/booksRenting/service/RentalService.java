@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,6 +38,7 @@ public class RentalService {
         book.setUserId(userId);
         book.setRentedDate(LocalDateTime.now());
         book.setStatus(BOOK_RENTED_STATUS);
+        book.setReservedTillTimeStamp(Instant.MAX.getEpochSecond());
         return bookMappingService.mapToBookDTO(bookRepository.save(book));
     }
 
@@ -48,6 +50,7 @@ public class RentalService {
         book.setUserId(null);
         book.setRentedDate(null);
         book.setStatus(BOOK_AVAILABLE_STATUS);
+        book.setReservedTillTimeStamp(0);
         bookRepository.save(book);
 
         rental.setReturnDate(LocalDateTime.now());

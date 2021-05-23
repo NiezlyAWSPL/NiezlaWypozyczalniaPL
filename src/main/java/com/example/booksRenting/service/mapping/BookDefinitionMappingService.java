@@ -2,6 +2,7 @@ package com.example.booksRenting.service.mapping;
 
 import com.example.booksRenting.dto.BookDefinitionDTO;
 import com.example.booksRenting.dto.bookDefinition.CreateBookDefinitionDTO;
+import com.example.booksRenting.model.entity.Book;
 import com.example.booksRenting.model.entity.BookDefinition;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,16 @@ public class BookDefinitionMappingService {
         result.setPk(request.getLibraryId());
         result.setTitle(request.getTitle());
         result.setAuthor(request.getAuthor());
-        result.setSk(request.getAuthor() + "#" + request.getTitle());
+        result.setSk((request.getTitle() + "#" + request.getAuthor()).toLowerCase());
+        return result;
+    }
+
+    public BookDefinition mapToBookDefinition(Book book) {
+        var result = new BookDefinition();
+        result.setPk(book.getLibraryId());
+        result.setTitle(book.getTitle());
+        result.setAuthor(book.getAuthor());
+        result.setSk((book.getTitle() + "#" + book.getAuthor()).toLowerCase());
         return result;
     }
 }

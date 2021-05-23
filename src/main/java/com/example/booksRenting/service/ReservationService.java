@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,6 +40,7 @@ public class ReservationService {
         book.setUserId(userId);
         book.setReservationBeginDate(LocalDateTime.now());
         book.setReservationExpireDate(getReservationExpireDate(book.getReservationBeginDate()));
+        book.setReservedTillTimeStamp(Instant.now().getEpochSecond() + reservationDurationSeconds);
         book.setStatus(BOOK_RESERVED_STATUS);
         return bookMappingService.mapToBookDTO(bookRepository.save(book));
     }
@@ -49,6 +51,18 @@ public class ReservationService {
                 .filter(b -> b.getReservationExpireDate().isAfter(LocalDateTime.now()))
                 .map(bookMappingService::mapToBookDTO)
                 .collect(Collectors.toList());
+    }
+
+    public BookDTO cancelReservation(String pk) {
+        var book = bookRepository.findByPkAndSk(pk, SORT_KEY_BOOK).orElseThrow();
+
+        book.setReservedTillTimeStamp(0);
+        book.setStatus("available");
+        book.setReservationBeginDate(null);
+        book.setReservationExpireDate(null);
+        book.setUserId(null);
+
+        return bookMappingService.mapToBookDTO(bookRepository.save(book));
     }
 
 }
