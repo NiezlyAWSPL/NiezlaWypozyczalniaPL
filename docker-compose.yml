@@ -9,7 +9,6 @@ services:
       - '8000:8000'
     volumes:
       - db-volume:/var/lib/dynamodb/
-      
 
 volumes:
   db-volume:
