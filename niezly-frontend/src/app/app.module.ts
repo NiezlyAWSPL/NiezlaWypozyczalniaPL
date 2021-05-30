@@ -5,16 +5,22 @@ import { AppComponent } from './app.component';
 import { BooksComponent } from './books/books.component';
 import { RentalsComponent } from './rentals/rentals.component';
 import { MainComponent } from './main/main.component';
+import {MessagesModule} from "primeng/messages";
+import {RouterModule} from "@angular/router";
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BooksComponent,
     RentalsComponent,
-    MainComponent
+    MainComponent,
+    MenuComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    MessagesModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
