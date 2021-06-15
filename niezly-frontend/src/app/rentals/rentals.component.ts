@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {BookDTO, RentalDTO} from "../dto/dto";
+import {RentalService} from "../service/rental.service";
 
 @Component({
   selector: 'app-rentals',
@@ -7,9 +10,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RentalsComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private router: Router,
+              private rentalService: RentalService) {
   }
 
+  loadedRentals: RentalDTO[];
+  rentals: RentalDTO[];
+  selectedRental: RentalDTO;
+
+  showReturnModal: boolean = false;
+
+  ngOnInit(): void {
+    this.rentalService.getUserOldRentals("user") // todo proper user name
+        .subscribe(rentals => {
+          this.loadedRentals = rentals;
+          this.rentals = rentals;
+        })
+  }
+
+  onRentalClick(rental: RentalDTO) {
+    this.selectedRental = rental;
+  }
+
+  onReturnNoClick() {
+    this.showReturnModal = false;
+  }
+
+  onReturnYesClick() {
+    // todo send return request
+    this.showReturnModal = false;
+  }
 }
