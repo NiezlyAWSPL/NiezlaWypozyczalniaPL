@@ -12,8 +12,8 @@ public class BookDefinitionMappingService {
     public BookDefinitionDTO mapToBookDefinitionDTO(BookDefinition bookDefinition) {
         var result = new BookDefinitionDTO();
         result.setId(bookDefinition.getPk() + "#" + bookDefinition.getSk());
-        result.setTitle(bookDefinition.getTitle());
-        result.setAuthor(bookDefinition.getAuthor());
+        result.setTitle(bookDefinition.getDefinitionTitle());
+        result.setAuthor(bookDefinition.getAuthorTitle());
         result.setLibraryId(bookDefinition.getPk());
         return result;
     }
@@ -21,8 +21,8 @@ public class BookDefinitionMappingService {
     public BookDefinition mapToBookDefinition(CreateBookDefinitionDTO request) {
         var result = new BookDefinition();
         result.setPk(request.getLibraryId());
-        result.setTitle(request.getTitle());
-        result.setAuthor(request.getAuthor());
+        result.setDefinitionTitle(request.getTitle());
+        result.setAuthorTitle(request.getAuthor());
         result.setSk((request.getTitle() + "#" + request.getAuthor()).toLowerCase());
         return result;
     }
@@ -30,8 +30,8 @@ public class BookDefinitionMappingService {
     public BookDefinition mapToBookDefinition(Book book) {
         var result = new BookDefinition();
         result.setPk(book.getLibraryId());
-        result.setTitle(book.getTitle());
-        result.setAuthor(book.getAuthor());
+        result.setDefinitionTitle(book.getTitle());
+        result.setAuthorTitle(book.getAuthor());
         result.setSk((book.getTitle() + "#" + book.getAuthor()).toLowerCase());
         return result;
     }

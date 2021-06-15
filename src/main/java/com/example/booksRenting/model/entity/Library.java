@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@DynamoDBTable(tableName = "libraryData")
+@DynamoDBTable(tableName = "books")
 public class Library extends BaseEntity{
 
     @Override
