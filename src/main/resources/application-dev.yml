@@ -14,8 +14,8 @@ spring:
       client:
         registration:
           cognito:
-            clientId: 4m1mdqsb1gn4pp08fmj1jodqgj
-            clientSecret: 19fl2tqkmj3m0q0i16ka1k4sppt302fbiosve683hjvhj1uhj23u
+            clientId: 2pg4s9aqif5213bfkhb2vvsetv
+            clientSecret: 3i41kqgqd6nd5okrubttces91d42qppaddbse2166hkl9c1d182
             scope: openid
             redirect-uri: http://localhost:8080/login/oauth2/code/cognito
             clientName: BooksRentingApp
