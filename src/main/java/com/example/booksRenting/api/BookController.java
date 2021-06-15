@@ -17,12 +17,12 @@ public class BookController {
 
     @GetMapping("/{id}")
     public BookDTO getBook(@PathVariable String id) {
-        return this.bookService.findByPk(id);
+        return bookService.findByPk(id);
     }
 
     @PostMapping
     public BookDTO createBook(@RequestBody CreateBookRequestDTO bookDTO) {
-        return this.bookService.createBook(bookDTO);
+        return bookService.createBook(bookDTO);
     }
 
     @GetMapping

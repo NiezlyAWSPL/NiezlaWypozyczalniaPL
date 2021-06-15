@@ -39,6 +39,7 @@ public class RentalController {
     public List<BookDTO> getCurrentRentedBookByUser(@RequestParam("user") @NotNull String user) {
         return rentalService.getCurrentRentedBookByUser(user);
     }
+
     @GetMapping("/old")
     public List<RentalDTO> getUserOldRentals(@RequestParam("user") @NotNull String user) {
         return rentalService.getUserOldRentals(user);
