@@ -1,28 +1,27 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppComponent } from './app.component';
-import { BooksComponent } from './books/books.component';
-import { RentalsComponent } from './rentals/rentals.component';
-import { MainComponent } from './main/main.component';
-import {MessagesModule} from "primeng/messages";
-import {RouterModule} from "@angular/router";
-import { MenuComponent } from './menu/menu.component';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {RouterModule} from "@angular/router"
+import {RentalsComponent} from "./rentals/rentals.component";
+import {MenuComponent} from "./menu/menu.component";
+import {AppComponent} from "./app.component";
+import {BooksComponent} from "./books/books.component";
+import {MainComponent} from "./main/main.component";
+import {routes} from "./app.routes";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    BooksComponent,
-    RentalsComponent,
-    MainComponent,
-    MenuComponent
-  ],
-  imports: [
-    BrowserModule,
-    MessagesModule,
-    RouterModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        BooksComponent,
+        RentalsComponent,
+        MainComponent,
+        MenuComponent
+    ],
+    imports: [
+        RouterModule.forRoot(routes),
+        BrowserModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
