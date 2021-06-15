@@ -3,14 +3,13 @@ import {BehaviorSubject, Observable} from 'rxjs/index';
 
 import {Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
-import {MsgService} from './common/service/msg.service';
 
 @Injectable()
 export class AppService {
   private _blockUi = new BehaviorSubject(false);
   public readonly blockUi: Observable<boolean> = this._blockUi.asObservable();
 
-  constructor(private messageService: MsgService) {
+  constructor() {
   }
 
   blockUI() {
@@ -26,7 +25,6 @@ export class AppService {
       router.navigate(['/login']);
     } else {
       const err = error.error ? error.error : error;
-      this.messageService.error(err.message ? err.message : err, true);
     }
     this.unblockUI();
   }
