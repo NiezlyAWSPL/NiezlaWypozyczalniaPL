@@ -23,11 +23,6 @@ export class CreateBookDefinitionDTO {
     author: string;
 }
 
-export class CreateLibraryRequestDTO {
-    name: string;
-    address: string;
-}
-
 export class RentBookRequestDTO {
     pk: string;
     user: string;
