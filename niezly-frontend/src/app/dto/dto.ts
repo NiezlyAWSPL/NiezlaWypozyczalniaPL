@@ -10,39 +10,39 @@ export class CreateBookRequestDTO {
     libraryId: string;
 }
 
-public class BookDefinitionFilterDTO {
+export class BookDefinitionFilterDTO {
     libraryId: string;
     titlePrefix: string;
     skip: number;
     take: number;
 }
 
-public class CreateBookDefinitionDTO {
+export class CreateBookDefinitionDTO {
     libraryId: string;
     title: string;
     author: string;
 }
 
-public class CreateLibraryRequestDTO {
+export class CreateLibraryRequestDTO {
     name: string;
     address: string;
 }
 
-public class RentBookRequestDTO {
+export class RentBookRequestDTO {
     pk: string;
     user: string;
 }
 
-public class ReturnBookRequestDTO {
+export class ReturnBookRequestDTO {
     pk: string;
 }
 
-public class ReserveBookRequestDTO {
+export class ReserveBookRequestDTO {
     pk: string;
     user: string;
 }
 
-public class BookDefinitionDTO {
+export class BookDefinitionDTO {
     id: string;
     libraryId: string;
     title: string;
@@ -67,7 +67,7 @@ export class LibraryDTO {
     address: string;
 }
 
-public class RentalDTO {
+export class RentalDTO {
     pk: string;
     author: string;
     title: string;
