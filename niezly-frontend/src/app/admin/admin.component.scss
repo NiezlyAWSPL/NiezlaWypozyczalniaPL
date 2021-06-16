@@ -135,7 +135,8 @@
   }
 
   .return-modal-bg,
-  .rental-modal-bg {
+  .rental-modal-bg,
+  .cancel-reservation-modal-bg {
     position: fixed;
     top: 0;
     left: 0;
@@ -146,7 +147,8 @@
     place-items: center;
 
     .return-modal,
-    .rental-modal {
+    .rental-modal,
+    .cancel-reservation-modal {
       background: #fff;
       width: 400px;
       padding: 50px;
