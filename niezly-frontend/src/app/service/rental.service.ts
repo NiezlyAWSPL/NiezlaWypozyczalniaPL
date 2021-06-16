@@ -24,22 +24,15 @@ export class RentalService {
         return this.http.post<RentalDTO>(`/api/books/rented/return`, returnBookRequestDTO, {headers: this.sessionService.getHeaders()});
     }
 
-    getBookRentals(pk: string, skip: number, take: number): Observable<RentalDTO[]> {
-        return this.http.get<RentalDTO[]>(`/api/books/rented/`, {
-            params: new HttpParams().set('skip', skip).set('take', take),
+    getCurrentRentedBookByUser(userId: string): Observable<BookDTO[]> {
+        return this.http.get<BookDTO[]>(`/api/books/rented`, {
+            params: new HttpParams().set('user', userId),
             headers: this.sessionService.getHeaders()
         });
     }
 
     getCurrentRentedBooksByLoggedUser(): Observable<BookDTO[]> {
         return this.http.get<BookDTO[]>(`/api/books/rented/loggedUser`, {
-            headers: this.sessionService.getHeaders()
-        });
-    }
-
-    getCurrentRentedBooksByUser(user: string): Observable<BookDTO[]> {
-        return this.http.get<BookDTO[]>(`/api/books/rented/`, {
-            params: new HttpParams().set('user', user),
             headers: this.sessionService.getHeaders()
         });
     }
@@ -59,10 +52,6 @@ export class RentalService {
                 headers: this.sessionService.getHeaders()
             }
         );
-    }
-
-    getFilteredRentals(titlePhase: string): Observable<RentalDTO[]> {
-        return this.http.get<RentalDTO[]>(`/api/books/rented/filter/${titlePhase}`, {headers: this.sessionService.getHeaders()});
     }
 
 }

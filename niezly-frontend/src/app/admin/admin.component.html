@@ -4,8 +4,8 @@
 
         <div class="user-input">
             <div class="header">User</div>
-            <div><input type="text" #v placeholder="Login" #userLogin></div>
-            <div><button (click)="fetchUserData(userLogin.value)">Load data</button></div>
+            <div><input type="text" #v placeholder="ID" #userId></div>
+            <div><button (click)="fetchUserData(userId.value)">Load data</button></div>
         </div>
 
         <div class="details-container">
@@ -54,12 +54,14 @@
     <div class="rental-modal-bg" *ngIf="showBookRentalForm">
         <div class="rental-modal">
             <div>
-                Input book title
-                <input #bookTitle>
+                Input user ID <input #rentUserId>
+            </div>
+            <div>
+                Input book ID <input #rentBookId>
             </div>
             <div class="actions">
                 <button class="no" (click)="onRentalNoClick()">Cancel</button>
-                <button class="yes" (click)="onRentalYesClick(bookTitle.value)">Rent</button>
+                <button class="yes" (click)="onRentalYesClick(rentBookId.value, rentUserId.value)">Rent</button>
             </div>
         </div>
     </div>

@@ -20,9 +20,9 @@ export class ReservationService {
             headers: this.sessionService.getHeaders()
         });
     }
-    getReservations(user: string): Observable<BookDTO[]> {
+    getReservations(userId: string): Observable<BookDTO[]> {
         return this.http.get<BookDTO[]>(`/api/books/reserved`, {
-            params: new HttpParams().set('user', user),
+            params: new HttpParams().set('user', userId),
             headers: this.sessionService.getHeaders()
         });
     }
@@ -31,7 +31,4 @@ export class ReservationService {
         return this.http.delete<BookDTO>(`/api/books/reserved/${pk}`, {headers: this.sessionService.getHeaders()});
     }
 
-    getFilteredReservations(titlePhase: string): Observable<BookDTO> {
-        return this.http.get<BookDTO>(`/api/books/reserved/${titlePhase}`, {headers: this.sessionService.getHeaders()});
-    }
 }
