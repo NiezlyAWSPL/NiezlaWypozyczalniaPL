@@ -20,8 +20,42 @@
         </div>
     </div>
 
-    <div class="user-details">
-
+    <div class="details">
+        <div class="details-container">
+            <div class="header">Rentals</div>
+            <div class="labels">
+                <div class="label"></div>
+                <div class="label">Title</div>
+                <div class="actions">Actions</div>
+            </div>
+            <div class="detail" *ngFor="let r of selectedUserRentals">
+                <div class="label">Rental</div>
+                <div class="label">{{r.title}}</div>
+                <div class="actions">
+                    <a>Return</a>
+                </div>
+            </div>
+        </div>
+        <div class="details-container">
+            <div class="header">Reservations</div>
+            <div class="labels">
+                <div class="label"></div>
+                <div class="label">Title</div>
+                <div class="actions">Actions</div>
+            </div>
+            <div class="detail" *ngFor="let r of selectedUserReservations">
+                <div class="label">Reservation</div>
+                <div class="label">{{r.title}}</div>
+                <div class="actions">
+                    <a>Rent</a>
+                    <a>Cancel</a>
+                </div>
+            </div>
+        </div>
+        <div class="buttons-container">
+            <button>Manual reservation</button>
+            <button>Manual rental</button>
+            <button>Manual return</button>
+        </div>
     </div>
-
 </div>

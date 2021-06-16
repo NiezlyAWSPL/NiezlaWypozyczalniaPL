@@ -42,7 +42,7 @@
     }
 
     .users-container {
-      width: 100%;
+      width: 90%;
       padding: 15px;
       border-radius: 15px;
       background: #fff;
@@ -82,6 +82,109 @@
         }
       }
 
+    }
+  }
+
+  .details {
+    width: 50%;
+
+    .buttons-container {
+      width: 66%;
+      align-content: center;
+
+      display: flex;
+      flex-wrap: wrap;
+
+      button {
+        margin: 2px;
+        background-color: #6daace;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        font-size: 16px;
+        display: inline-block;
+      }
+    }
+
+    .details-container {
+      width: 60%;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 15px;
+      background: #fff;
+      -webkit-box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.2);
+
+      & > div {
+        display: flex;
+        padding-left: 10px;
+        padding-right: 10px;
+
+        .name {
+          margin-left: auto;
+        }
+
+        .actions {
+          width: 66%;
+          margin-left: auto;
+
+          a {
+            padding-right: 10px;
+          }
+        }
+      }
+
+      .labels {
+        padding-bottom: 10px;
+        color: #000;
+
+        .id {
+          width: 20%;
+        }
+
+        .name {
+          width: 25%;
+        }
+
+        .actions {
+          display: flex;
+          justify-content: center;
+          width: 55%;
+        }
+
+        .actions {
+          margin-left: auto;
+        }
+      }
+
+      .detail {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-top: 1px solid #ddd;
+        transition: .2s;
+        cursor: pointer;
+
+        .id {
+          width: 20%;
+        }
+
+        .name {
+          width: 25%;
+        }
+
+        .actions {
+          width: 55%;
+          display: flex;
+          justify-content: center;
+        }
+
+        &:hover, &.active {
+          background: #eee;
+          color: #000;
+        }
+      }
     }
   }
 }

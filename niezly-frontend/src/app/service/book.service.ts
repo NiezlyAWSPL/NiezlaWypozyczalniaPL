@@ -18,14 +18,17 @@ export class BookService {
   }
 
   createBook(createBookRequestDTO: CreateBookRequestDTO): Observable<BookDTO> {
-    return this.http.post<BookDTO>(`/api/books`, createBookRequestDTO);
+    return this.http.post<BookDTO>(`/api/books`, createBookRequestDTO, {headers: this.sessionService.getHeaders()});
   }
 
   getFirstAvailableByBookDefinition(bookDefinitionId: number): Observable<BookDTO> {
-    return this.http.get<BookDTO>(`/api/books`, { params: new HttpParams().set('bookDefinitionId', bookDefinitionId) });
+    return this.http.get<BookDTO>(`/api/books`, {
+      params: new HttpParams().set('bookDefinitionId', bookDefinitionId) ,
+      headers: this.sessionService.getHeaders()
+    });
   }
 
   getBooks(bookFilter: BookFilterDTO) {
-    return this.http.post<BookDTO[]>(`/api/books`, bookFilter);
+    return this.http.post<BookDTO[]>(`/api/books`, bookFilter, {headers: this.sessionService.getHeaders()});
   }
 }
