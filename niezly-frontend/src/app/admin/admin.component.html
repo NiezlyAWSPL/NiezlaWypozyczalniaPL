@@ -1,26 +1,13 @@
-<div class="user-management-component">
-
-    <div class="users">
-        <div class="header">Select a user to view his status and take actions</div>
-
-        <div class="filter">
-            <input id="filter-users" value="{{loginPhase}}" type="text" #v placeholder="Filter" (input)="onFilterInput(v.value)">
-        </div>
-
-        <div class="users-container">
-            <div class="labels">
-                <div class="guid">ID</div>
-                <div class="login">Login</div>
-            </div>
-            <div class="user" *ngFor="let u of users" (click)="onUserClick(u)"
-                 [ngClass]="u == selectedUser && 'active'">
-                <div class="guid">{{u.guid}}</div>
-                <div class="login">{{u.login}}</div>
-            </div>
-        </div>
-    </div>
+<div class="admin-component">
 
     <div class="details">
+
+        <div class="user-input">
+            <div class="header">User</div>
+            <div><input type="text" #v placeholder="Login" [ngModel]="userLogin"></div>
+            <div><button (click)="loadUserData()">Load data</button></div>
+        </div>
+
         <div class="details-container">
             <div class="header">Rentals</div>
             <div class="labels">
@@ -28,7 +15,7 @@
                 <div class="label">Title</div>
                 <div class="actions">Actions</div>
             </div>
-            <div class="detail" *ngFor="let r of selectedUserRentals">
+            <div class="detail" *ngFor="let r of rentals">
                 <div class="label">Rental</div>
                 <div class="label">{{r.title}}</div>
                 <div class="actions">
@@ -36,6 +23,7 @@
                 </div>
             </div>
         </div>
+
         <div class="details-container">
             <div class="header">Reservations</div>
             <div class="labels">
@@ -43,7 +31,7 @@
                 <div class="label">Title</div>
                 <div class="actions">Actions</div>
             </div>
-            <div class="detail" *ngFor="let r of selectedUserReservations">
+            <div class="detail" *ngFor="let r of reservations">
                 <div class="label">Reservation</div>
                 <div class="label">{{r.title}}</div>
                 <div class="actions">
@@ -52,10 +40,24 @@
                 </div>
             </div>
         </div>
+
         <div class="buttons-container">
-            <button>Manual reservation</button>
-            <button>Manual rental</button>
-            <button>Manual return</button>
+            <button (click)="openManualRentalDialog()">Rent book</button>
+        </div>
+
+    </div>
+
+    <div class="rental-modal-bg" *ngIf="showBookRentalForm">
+        <div class="rental-modal">
+            <div>
+                Input book title
+                <input #bookTitle>
+            </div>
+            <div class="actions">
+                <button class="no" (click)="onRentalNoClick()">Cancel</button>
+                <button class="yes" (click)="onRentalYesClick(bookTitle.value)">Rent</button>
+            </div>
         </div>
     </div>
+
 </div>

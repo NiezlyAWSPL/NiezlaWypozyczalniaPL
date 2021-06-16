@@ -7,8 +7,7 @@ import {AppComponent} from "./app.component";
 import {BooksComponent} from "./books/books.component";
 import {MainComponent} from "./main/main.component";
 import {routes} from "./app.routes";
-import {BookManagementComponent} from "./book-management/book-management.component";
-import {UserManagementComponent} from "./user-management/user-management.component";
+import {AdminComponent} from "./admin/admin.component";
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from "@angular/forms";
 
@@ -19,8 +18,7 @@ import {FormsModule} from "@angular/forms";
         ProfileComponent,
         MainComponent,
         MenuComponent,
-        BookManagementComponent,
-        UserManagementComponent,
+        AdminComponent,
     ],
     imports: [
         RouterModule.forRoot(routes),
