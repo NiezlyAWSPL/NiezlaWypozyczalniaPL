@@ -5,10 +5,10 @@ import {RentalService} from "../service/rental.service";
 
 @Component({
   selector: 'app-rentals',
-  templateUrl: './rentals.component.html',
-  styleUrls: ['./rentals.component.scss']
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
 })
-export class RentalsComponent implements OnInit {
+export class ProfileComponent implements OnInit {
 
   constructor(private router: Router,
               private rentalService: RentalService) {

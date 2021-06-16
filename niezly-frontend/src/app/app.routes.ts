@@ -1,6 +1,6 @@
 import {Routes} from '@angular/router';
 import {BooksComponent} from "./books/books.component";
-import {RentalsComponent} from "./rentals/rentals.component";
+import {ProfileComponent} from "./profile/profile.component";
 import {MainComponent} from "./main/main.component";
 import {BookManagementComponent} from "./book-management/book-management.component";
 import {UserManagementComponent} from "./user-management/user-management.component";
@@ -11,8 +11,8 @@ export const routes: Routes = [
         component: MainComponent,
         children: [
             {
-                path: 'rentals',
-                component: RentalsComponent
+                path: 'profile',
+                component: ProfileComponent
             },
             {
                 path: 'books',
