@@ -11,18 +11,13 @@ reservation:
 spring:
   security:
     oauth2:
-      client:
-        registration:
-          cognito:
-            clientId: 46gjtqpjmrnofop3tf0jefu1vv
-            clientSecret: np1ocoshq138nq8pj73e73patoli19rqriseu8kcvg7r8q6gseg
-            scope: openid
-            redirect-uri: http://localhost:8080/login/oauth2/code/cognito
-            clientName: BooksRentingApp
-            authorization-grant-type: authorization_code
-        provider:
-          cognito:
-            authorizationUri: https://niezly-books-renting.auth.us-east-1.amazoncognito.com/oauth2/authorize
-            tokenUri: https://niezly-books-renting.auth.us-east-1.amazoncognito.com/oauth2/token
-            jwkSetUri: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_fcpozvXGB/.well-known/jwks.json
-            nick-name-attribute: username
+      resourceserver:
+        jwt:
+          issuer-uri: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_fcpozvXGB
+com:
+  example:
+    security:
+      jwt:
+        aws:
+          userPoolId: us-east-1_fcpozvXGB
+          region: "us-east-1"
