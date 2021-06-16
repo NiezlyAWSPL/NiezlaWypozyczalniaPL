@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {BookDTO, RentalDTO} from "../dto/dto";
 import {RentalService} from "../service/rental.service";
 import {ReservationService} from "../service/reservation.service";
+import {UserService} from "../service/user.service";
 
 @Component({
   selector: 'app-rentals',
@@ -13,7 +14,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(private router: Router,
               private rentalService: RentalService,
-              private reservationService: ReservationService) {
+              private reservationService: ReservationService,
+              private userService: UserService) {
   }
 
   rentals: RentalDTO[];
@@ -22,24 +24,20 @@ export class ProfileComponent implements OnInit {
 
   showReservationCancelModal: boolean = false;
 
+  currentUserLogin: string;
+
   ngOnInit(): void {
-    // todo proper usernames
+    this.userService.getCurrentUser().subscribe(user => {
+      this.rentalService.getUserOldRentals(user.login).subscribe(rentals => this.rentals = rentals);
+      this.reservationService.getReservations(user.login).subscribe(reservations => this.reservations = reservations);
+    })
 
-    this.rentalService.getUserOldRentals("user").subscribe(rentals => {
-      this.rentals = rentals;
-    });
-
-    this.reservationService.getReservations("user").subscribe(reservations => {
-      this.reservations = reservations;
-    });
-
-    this.rentals = [
-      { pk: "RENTAL1", author: "A.H.", title: "My Struggle", libraryId: "LIB1", userId: "user", rentedDate: new Date(), returnDate: new Date()}
-    ];
-
-    this.reservations = [
-      { pk: "BOOK1", bookDefinitionId: "BOOKDEF1", author: "J.P.", title: "Poradnik", libraryId: "LIB1", userId: "user", status: "Reserved", rentedDate: "today", reservationBeginDate: "today", reservationExpireDate: "today", }
-    ];
+    // this.rentals = [
+    //   { pk: "RENTAL1", author: "A.H.", title: "My Struggle", libraryId: "LIB1", userId: "user", rentedDate: new Date(), returnDate: new Date()}
+    // ];
+    // this.reservations = [
+    //   { pk: "BOOK1", bookDefinitionId: "BOOKDEF1", author: "J.P.", title: "Poradnik", libraryId: "LIB1", userId: "user", status: "Reserved", rentedDate: "today", reservationBeginDate: "today", reservationExpireDate: "today", }
+    // ];
   }
 
   onReservationCancelClick(reservation: BookDTO) {

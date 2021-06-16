@@ -13,5 +13,9 @@ export class UserService {
     getUsers(loginPhase: string): Observable<UserDTO[]> {
         return this.http.get<UserDTO[]>(`/api/users/getFilteredUsers`, {params: new HttpParams().set("loginPhase", loginPhase)});
     }
+    
+    getCurrentUser(): Observable<UserDTO> {
+        return this.http.get<UserDTO>(`/api/users/current`);
+    }
 
 }
