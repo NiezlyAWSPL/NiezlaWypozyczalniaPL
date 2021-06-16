@@ -7,6 +7,8 @@ import {AppComponent} from "./app.component";
 import {BooksComponent} from "./books/books.component";
 import {MainComponent} from "./main/main.component";
 import {routes} from "./app.routes";
+import {BookManagementComponent} from "./book-management/book-management.component";
+import {UserManagementComponent} from "./user-management/user-management.component";
 
 @NgModule({
     declarations: [
@@ -14,7 +16,9 @@ import {routes} from "./app.routes";
         BooksComponent,
         RentalsComponent,
         MainComponent,
-        MenuComponent
+        MenuComponent,
+        BookManagementComponent,
+        UserManagementComponent,
     ],
     imports: [
         RouterModule.forRoot(routes),

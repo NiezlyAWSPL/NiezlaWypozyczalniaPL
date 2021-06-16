@@ -10,9 +10,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RentalRepository extends PagingAndSortingRepository<Rental, BaseEntity.BaseEntityId> {
+
     Optional<Rental> findByPkAndSk(String pk, String sk);
 
     Page<Rental> findByPkAndSkStartsWith(String pk, String skPrefix, Pageable pageable);
 
     List<Rental> findByUserIdAndSkStartsWith(String userId, String skPrefix);
+
+    List<Rental> findByTitleLike(String titlePhase);
 }

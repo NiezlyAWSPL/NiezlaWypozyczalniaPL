@@ -35,10 +35,16 @@ public class RentalController {
         return rentalService.getBookRentals(pk, skip, take);
     }
 
+    @GetMapping("/filter/{titlePhase}")
+    public List<RentalDTO> getFilteredRentals(@PathVariable("titlePhase") String titlePhase){
+        return rentalService.getFilteredRentals(titlePhase);
+    }
+
     @GetMapping()
     public List<BookDTO> getCurrentRentedBookByUser(@RequestParam("user") @NotNull String user) {
         return rentalService.getCurrentRentedBookByUser(user);
     }
+
     @GetMapping("/old")
     public List<RentalDTO> getUserOldRentals(@RequestParam("user") @NotNull String user) {
         return rentalService.getUserOldRentals(user);
