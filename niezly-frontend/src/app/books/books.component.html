@@ -2,8 +2,8 @@
 
     <div class="books">
         <div class="library-select">
-            <select [(ngModel)]="selectedLibrary" >
-                <option *ngFor="let l of libraries" (click)="onLibrarySelect(l)">{{l.name}}</option>
+            <select [(ngModel)]="selectedLibraryName" (ngModelChange)="fetchBooks()">
+                <option *ngFor="let l of libraries">{{l.name}}</option>
             </select>
         </div>
         
