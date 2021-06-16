@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Message} from 'primeng/api';
+import {Location} from '@angular/common'
+import {ActivatedRoute} from "@angular/router";
+import {HeaderConstants} from "../dto/constants";
 
 @Component({
     selector: 'app-main',
@@ -8,10 +10,20 @@ import {Message} from 'primeng/api';
 })
 export class MainComponent implements OnInit {
 
-    constructor() {
+    constructor(private activatedRoute: ActivatedRoute,
+                private location: Location) {
     }
 
     ngOnInit(): void {
-
+        this.activatedRoute.fragment
+            .subscribe(fragment => {
+                let params = new URLSearchParams(fragment);
+                let accessToken = params.get(HeaderConstants.HEADER_ACCESS_TOKEN);
+                if (accessToken) {
+                    localStorage.setItem(HeaderConstants.HEADER_ACCESS_TOKEN, accessToken)
+                    const pathWithoutHash = this.location.path(false);
+                    this.location.replaceState(pathWithoutHash);
+                }
+            });
     }
 }

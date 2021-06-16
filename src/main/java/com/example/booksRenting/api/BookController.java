@@ -5,6 +5,7 @@ import com.example.booksRenting.dto.book.CreateBookRequestDTO;
 import com.example.booksRenting.service.BookService;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -15,6 +16,11 @@ public class BookController {
 
     public BookController(BookService bookService) {
         this.bookService = bookService;
+    }
+
+    @GetMapping("/xd")
+    public Principal getBook(Principal principal) {
+        return principal;
     }
 
     @GetMapping("/{id}")
