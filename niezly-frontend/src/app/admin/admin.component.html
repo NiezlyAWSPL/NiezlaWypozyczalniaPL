@@ -4,7 +4,7 @@
 
         <div class="user-input">
             <div class="header">User</div>
-            <div><input type="text" #v placeholder="ID" #userId></div>
+            <div><input type="text" #v placeholder="Login" #userId></div>
             <div><button (click)="fetchUserData(userId.value)">Load data</button></div>
         </div>
 
@@ -53,7 +53,7 @@
     <div class="rental-modal-bg" *ngIf="showBookRentalForm">
         <div class="rental-modal">
             <div>
-                Input user ID <input #rentUserId>
+                Input user login <input #rentUserId>
             </div>
             <div>
                 Input book ID <input #rentBookId>
