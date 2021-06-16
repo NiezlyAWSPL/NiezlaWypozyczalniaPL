@@ -1,7 +1,7 @@
-.admin-component {
+.rentals-component {
   padding: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   color: #444;
 
   .header {
@@ -10,58 +10,47 @@
     text-align: center;
   }
 
-  button {
-    margin: 2px;
-    background-color: #6daace;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    font-size: 16px;
-    display: inline-block;
-    border-radius: 5px;
+  .rentals,
+  .reservations {
+    padding: 20px;
+    width: 50%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 
-    &:hover, &.active {
-      background: #7bc1ea;
-      color: #ffffff;
+    .filter {
+      width: 60%;
+      margin-bottom: 20px;
+
+      input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 3px;
+        background: #fff;
+        border: none;
+        outline: none;
+        transition: .2s;
+        -webkit-box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.2);
+        box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.2);
+
+        &:focus {
+          -webkit-box-shadow: 0px 0px 15px 3px rgba(35, 137, 205, 0.55);
+          -moz-box-shadow: 0px 0px 15px 3px rgba(35, 137, 205, 0.55);
+          box-shadow: 0px 0px 15px 3px rgba(35, 137, 205, 0.55);
+        }
+      }
     }
-  }
 
-  .details {
-    width: 90%;
-
-    .buttons-container {
-      width: 100%;
-      align-content: center;
-
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    .user-input,
-    .details-container {
-      width: 100%;
-      align-content: center;
+    .rentals-container,
+    .reservations-container {
+      width: 90%;
       padding: 15px;
-      margin-bottom: 15px;
       border-radius: 15px;
       background: #fff;
       -webkit-box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.2);
       -moz-box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.2);
       box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.2);
-
-      input {
-        padding: 4px 4px;
-        margin: 4px 0;
-        box-sizing: border-box;
-        background-color: #ffffff;
-        color: #000000;
-      }
-
-      button {
-        padding: 8px 16px;
-        font-size: 14px;
-      }
 
       & > div {
         display: flex;
@@ -73,70 +62,38 @@
         }
 
         .actions {
-          width: 66%;
           margin-left: auto;
-
-          a {
-            padding-right: 10px;
-          }
         }
       }
 
       .labels {
         padding-bottom: 10px;
         color: #000;
-
-        .id {
-          width: 20%;
-        }
-
-        .name {
-          width: 25%;
-        }
-
-        .actions {
-          display: flex;
-          justify-content: center;
-          width: 55%;
-        }
-
-        .actions {
-          margin-left: auto;
-        }
       }
 
-      .detail {
+      .rental,
+      .reservation {
         padding-top: 10px;
         padding-bottom: 10px;
         border-top: 1px solid #ddd;
         transition: .2s;
         cursor: pointer;
 
-        .id {
-          width: 20%;
-        }
-
-        .name {
-          width: 25%;
-        }
-
-        .actions {
-          width: 55%;
-          display: flex;
-          justify-content: center;
-        }
-
         &:hover, &.active {
           background: #eee;
           color: #000;
         }
+
+        a {
+          color: #3ea0dc;
+          font-weight: bolder;
+        }
       }
+
     }
   }
 
-  .return-modal-bg,
-  .rental-modal-bg,
-  .cancel-reservation-modal-bg {
+  .reservation-cancel-modal-bg {
     position: fixed;
     top: 0;
     left: 0;
@@ -146,9 +103,7 @@
     display: grid;
     place-items: center;
 
-    .return-modal,
-    .rental-modal,
-    .cancel-reservation-modal {
+    .reservation-cancel-modal {
       background: #fff;
       width: 400px;
       padding: 50px;
@@ -167,14 +122,6 @@
         }
       }
 
-      input {
-        padding: 4px 4px;
-        margin: 4px 0;
-        box-sizing: border-box;
-        background-color: #ffffff;
-        color: #000000;
-      }
-
       .actions {
         display: flex;
         justify-content: space-between;
@@ -184,13 +131,12 @@
           border: 0;
           color: #fff;
           transition: .2s;
-          width: 50%;
-          height: 40px;
-          font-size: 18px;
+          width: 100px;
+          height: 62px;
+          font-size: 20px;
           cursor: pointer;
           outline: none;
           border-radius: 5px;
-          margin: 4px;
 
           &.yes {
             background: #3ea0dc;

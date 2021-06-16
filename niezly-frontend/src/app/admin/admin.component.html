@@ -4,8 +4,8 @@
 
         <div class="user-input">
             <div class="header">User</div>
-            <div><input type="text" #v placeholder="Login" [ngModel]="userLogin"></div>
-            <div><button (click)="loadUserData()">Load data</button></div>
+            <div><input type="text" #v placeholder="Login" #userLogin></div>
+            <div><button (click)="loadUserData(userLogin.value)">Load data</button></div>
         </div>
 
         <div class="details-container">
@@ -19,7 +19,7 @@
                 <div class="label">Rental</div>
                 <div class="label">{{r.title}}</div>
                 <div class="actions">
-                    <a>Return</a>
+                    <a (click)="openReturnDialog(r)">Return</a>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
         </div>
 
         <div class="buttons-container">
-            <button (click)="openManualRentalDialog()">Rent book</button>
+            <button (click)="openRentalDialog()">Rent book</button>
         </div>
 
     </div>
@@ -56,6 +56,30 @@
             <div class="actions">
                 <button class="no" (click)="onRentalNoClick()">Cancel</button>
                 <button class="yes" (click)="onRentalYesClick(bookTitle.value)">Rent</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="return-modal-bg" *ngIf="showBookReturnDialog">
+        <div class="return-modal">
+            <div class="description">
+                Are you sure you want to return <span>{{selectedRental.title}}</span> by <span>{{selectedRental.author}}</span>?
+            </div>
+            <div class="actions">
+                <button class="no" (click)="onReturnNoClick()">Cancel</button>
+                <button class="yes" (click)="onReturnYesClick()">Return</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="cancel-reservation-modal-bg" *ngIf="showReservationCancelDialog">
+        <div class="cancel-reservation-modal">
+            <div class="description">
+                Are you sure you want to cancel reservation of <span>{{selectedReservation.title}}</span> by user <span>{{selectedReservation.userId}}</span>?
+            </div>
+            <div class="actions">
+                <button class="no" (click)="onCancelReservationNoClick()">No</button>
+                <button class="yes" (click)="onCancelReservationYesClick()">Yes</button>
             </div>
         </div>
     </div>
