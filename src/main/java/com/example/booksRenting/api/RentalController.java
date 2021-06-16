@@ -5,6 +5,7 @@ import com.example.booksRenting.dto.RentalDTO;
 import com.example.booksRenting.dto.rental.RentBookRequestDTO;
 import com.example.booksRenting.dto.rental.ReturnBookRequestDTO;
 import com.example.booksRenting.service.RentalService;
+import com.example.booksRenting.utils.AuthorizationUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
@@ -43,7 +44,7 @@ public class RentalController {
 
     @GetMapping("/loggedUser")
     public List<BookDTO> getCurrentRentedBookByLoggedUser(Principal principal) {
-        return rentalService.getCurrentRentedBookByUser(principal.getName());
+        return rentalService.getCurrentRentedBookByUser(AuthorizationUtils.getUserName(principal));
     }
 
     @GetMapping()
@@ -53,7 +54,7 @@ public class RentalController {
 
     @GetMapping("/loggedUser/old")
     public List<RentalDTO> getLoggedUserOldRentals(Principal principal) {
-        return rentalService.getUserOldRentals(principal.getName());
+        return rentalService.getUserOldRentals(AuthorizationUtils.getUserName(principal));
     }
 
     @GetMapping("/old")

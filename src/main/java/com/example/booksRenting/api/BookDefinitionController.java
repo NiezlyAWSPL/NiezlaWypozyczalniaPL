@@ -33,7 +33,6 @@ public class BookDefinitionController {
 
     @PostMapping("/filtered")
     public List<BookDefinitionDTO> filter(@RequestBody BookDefinitionFilterDTO filterDTO) {
-        AuthorizationUtils.assureIsNiezlyBibliotekarz();
         return bookDefinitionService.findByFilter(filterDTO);
     }
 }

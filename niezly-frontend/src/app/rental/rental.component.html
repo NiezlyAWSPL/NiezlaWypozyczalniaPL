@@ -12,7 +12,13 @@
             <div class="rental" *ngFor="let r of currentRentals">
                 <div class="id">{{r.title}}</div>
                 <div class="name">{{r.author}}</div>
-                <div class="name">{{r.rentedDate}}</div>
+                <div class="name">{{
+                    (r.rentedDate.dayOfMonth < 10 ? '0' + r.rentedDate.dayOfMonth : r.rentedDate.dayOfMonth) + "."
+                    + (r.rentedDate.monthValue < 10 ? '0' + r.rentedDate.monthValue : r.rentedDate.monthValue) + "."
+                    + r.rentedDate.year + " "
+                    + (r.rentedDate.hour < 10 ? '0' + r.rentedDate.hour : r.rentedDate.hour) + ":"
+                    + (r.rentedDate.minute < 10 ? '0' + r.rentedDate.minute : r.rentedDate.minute)}}
+                </div>
             </div>
         </div>
     </div>
@@ -30,8 +36,20 @@
             <div class="rental" *ngFor="let r of oldRentals">
                 <div class="id">{{r.title}}</div>
                 <div class="name">{{r.author}}</div>
-                <div class="name">{{r.rentedDate}}</div>
-                <div class="name">{{r.returnDate}}</div>
+                <div class="name">{{
+                    (r.rentedDate.dayOfMonth < 10 ? '0' + r.rentedDate.dayOfMonth : r.rentedDate.dayOfMonth) + "."
+                    + (r.rentedDate.monthValue < 10 ? '0' + r.rentedDate.monthValue : r.rentedDate.monthValue) + "."
+                    + r.rentedDate.year + " "
+                    + (r.rentedDate.hour < 10 ? '0' + r.rentedDate.hour : r.rentedDate.hour) + ":"
+                    + (r.rentedDate.minute < 10 ? '0' + r.rentedDate.minute : r.rentedDate.minute)}}
+                </div>
+                <div class="name">{{
+                    (r.returnDate.dayOfMonth < 10 ? '0' + r.returnDate.dayOfMonth : r.returnDate.dayOfMonth) + "."
+                    + (r.returnDate.monthValue < 10 ? '0' + r.returnDate.monthValue : r.returnDate.monthValue) + "."
+                    + r.returnDate.year + " "
+                    + (r.returnDate.hour < 10 ? '0' + r.returnDate.hour : r.returnDate.hour) + ":"
+                    + (r.returnDate.minute < 10 ? '0' + r.returnDate.minute : r.returnDate.minute)}}
+                </div>
             </div>
         </div>
     </div>

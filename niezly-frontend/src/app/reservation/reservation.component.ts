@@ -38,6 +38,7 @@ export class ReservationComponent implements OnInit {
   onReservationCancelYesClick() {
     this.reservationService.cancelReservation(this.selectedReservation.pk).subscribe(book => {
       this.showReservationCancelModal = false;
+      this.reservationService.getLoggedReservations().subscribe(reservations => this.reservations = reservations);
     });
   }
 }

@@ -25,9 +25,9 @@ public class UserController {
     }
 
     @GetMapping("/current")
-    public UserDTO getCurrentUser() {
+    public UserDTO getCurrentUser(Principal principal) {
         return UserDTO.builder()
-                .authorities(AuthorizationUtils.getLoggedUserAuthorities())
+                .authorities(AuthorizationUtils.getLoggedUserAuthorities(principal))
                 .build();
     }
 
