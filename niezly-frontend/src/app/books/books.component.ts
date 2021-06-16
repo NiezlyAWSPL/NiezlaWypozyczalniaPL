@@ -37,7 +37,6 @@ export class BooksComponent implements OnInit {
   ngOnInit(): void {
     this.fetchCurrentUserLogin();
     this.fetchLibraries();
-    this.fetchBooks();
   }
 
   fetchCurrentUserLogin() {
@@ -50,6 +49,7 @@ export class BooksComponent implements OnInit {
     this.libraryService.getAllLibraries().subscribe(libraries => {
       this.libraries = libraries;
       this.selectedLibraryName = libraries[0].name;
+      this.fetchBooks();
     });
   }
 
