@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs/index";
 import {BookDTO, BookFilterDTO, CreateBookRequestDTO} from "../dto/dto";
+import {HeaderConstants} from "../dto/constants";
+import {SessionService} from "../session/session.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private sessionService: SessionService) { }
 
   getBook(bookId: number): Observable<BookDTO> {
-    return this.http.get<BookDTO>(`/api/books/${bookId}`);
+    return this.http.get<BookDTO>(`/api/books/${bookId}`, {headers: this.sessionService.getHeaders()});
   }
 
   createBook(createBookRequestDTO: CreateBookRequestDTO): Observable<BookDTO> {
