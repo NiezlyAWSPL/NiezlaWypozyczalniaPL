@@ -10,6 +10,7 @@ import com.example.booksRenting.service.LibraryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ import static com.example.booksRenting.constants.TableConstants.HASH_KEY_LIBRARY
 
 @Service
 @RequiredArgsConstructor
+@Profile("dev")
 public class MockInitializerService implements ApplicationRunner {
 
     private final LibraryService libraryService;
