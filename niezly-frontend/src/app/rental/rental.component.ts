@@ -18,7 +18,7 @@ export class RentalComponent implements OnInit {
               private userService: UserService) {
   }
 
-  rentals: RentalDTO[];
+  rentals: BookDTO[];
   reservations: BookDTO[];
   selectedReservation: BookDTO;
 
@@ -28,7 +28,7 @@ export class RentalComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getCurrentUser().subscribe(user => {
-      this.rentalService.getUserOldRentals(user.login).subscribe(rentals => this.rentals = rentals);
+      this.rentalService.getCurrentRentedBookByUser(user.login).subscribe(rentals => this.rentals = rentals);
       this.reservationService.getReservations(user.login).subscribe(reservations => this.reservations = reservations);
     })
 

@@ -23,10 +23,10 @@ export class AdminComponent {
   login: string = "";
 
   libraries: LibraryDTO[] = [];
-  rentals: RentalDTO[] = [];
+  rentals: BookDTO[] = [];
   reservations: BookDTO[] = [];
 
-  selectedRental: RentalDTO;
+  selectedRental: BookDTO;
   selectedReservation: BookDTO;
 
   showBookRentalForm: boolean = false;
@@ -37,14 +37,14 @@ export class AdminComponent {
   fetchUserData(userLogin: string) {
     this.login = userLogin;
     this.reservationService.getReservations(userLogin).subscribe(reservations => this.reservations = reservations);
-    this.rentalService.getUserOldRentals(userLogin).subscribe(rentals => this.rentals = rentals);
+    this.rentalService.getCurrentRentedBookByUser(userLogin).subscribe(rentals => this.rentals = rentals);
   }
 
   fetchLibraries() {
     this.libraryService.getAllLibraries().subscribe(libraries => this.libraries = libraries);
   }
 
-  openReturnDialog(rental: RentalDTO) {
+  openReturnDialog(rental: BookDTO) {
     this.selectedRental = rental;
     this.showBookReturnDialog = true;
   }

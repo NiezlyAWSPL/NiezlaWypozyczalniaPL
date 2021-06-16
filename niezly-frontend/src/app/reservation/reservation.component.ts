@@ -18,7 +18,7 @@ export class ReservationComponent implements OnInit {
               private userService: UserService) {
   }
 
-  rentals: RentalDTO[];
+  rentals: BookDTO[];
   reservations: BookDTO[];
   selectedReservation: BookDTO;
 
@@ -28,16 +28,9 @@ export class ReservationComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getCurrentUser().subscribe(user => {
-      this.rentalService.getUserOldRentals(user.login).subscribe(rentals => this.rentals = rentals);
+      this.rentalService.getCurrentRentedBookByUser(user.login).subscribe(rentals => this.rentals = rentals);
       this.reservationService.getReservations(user.login).subscribe(reservations => this.reservations = reservations);
     })
-
-    // this.rentals = [
-    //   { pk: "RENTAL1", author: "A.H.", title: "My Struggle", libraryId: "LIB1", userId: "user", rentedDate: new Date(), returnDate: new Date()}
-    // ];
-    // this.reservations = [
-    //   { pk: "BOOK1", bookDefinitionId: "BOOKDEF1", author: "J.P.", title: "Poradnik", libraryId: "LIB1", userId: "user", status: "Reserved", rentedDate: "today", reservationBeginDate: "today", reservationExpireDate: "today", }
-    // ];
   }
 
   onReservationCancelClick(reservation: BookDTO) {
