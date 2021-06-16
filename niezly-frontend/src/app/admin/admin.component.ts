@@ -37,7 +37,7 @@ export class AdminComponent {
   fetchUserData(userLogin: string) {
     this.login = userLogin;
     this.reservationService.getReservations(userLogin).subscribe(reservations => this.reservations = reservations);
-    this.rentalService.getCurrentRentedBookByUser(userLogin).subscribe(rentals => this.rentals = rentals);
+    this.rentalService.getCurrentRentedBooksByUser(userLogin).subscribe(rentals => this.rentals = rentals);
   }
 
   fetchLibraries() {
