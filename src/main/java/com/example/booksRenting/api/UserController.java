@@ -2,6 +2,7 @@ package com.example.booksRenting.api;
 
 import com.example.booksRenting.dto.user.UserDTO;
 import com.example.booksRenting.service.UserService;
+import com.example.booksRenting.utils.AuthorizationUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,8 +25,10 @@ public class UserController {
     }
 
     @GetMapping("/current")
-    public Principal getCurrentUser(Principal principal) {
-        return principal;
+    public UserDTO getCurrentUser() {
+        return UserDTO.builder()
+                .authorities(AuthorizationUtils.getLoggedUserAuthorities())
+                .build();
     }
 
 }
