@@ -69,6 +69,12 @@ public class RentalService {
                 .collect(Collectors.toList());
     }
 
+    public List<RentalDTO> getFilteredRentals(String titlePhase) {
+        return rentalRepository.findByTitleLike(titlePhase).stream()
+                .map(rentalMappingService::mapToRentalDTO)
+                .collect(Collectors.toList());
+    }
+
     public List<RentalDTO> getUserOldRentals(String user) {
         return rentalRepository.findByUserIdAndSkStartsWith(user, SORT_KEY_RENTAL_PREFIX + "#").stream()
                 .map(rentalMappingService::mapToRentalDTO)
