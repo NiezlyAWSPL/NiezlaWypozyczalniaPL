@@ -28,6 +28,11 @@ public class ReservationController {
         return reservationService.getUserCurrentReservations(user);
     }
 
+    @GetMapping("/filter/{titlePhase}")
+    public List<BookDTO> getFilteredReservations(@PathVariable("titlePhase") String titlePhase) {
+        return reservationService.getFilteredReservations(titlePhase);
+    }
+
     @DeleteMapping("/{pk}")
     public BookDTO cancelReservation(@PathVariable String pk) {
         return reservationService.cancelReservation(pk);

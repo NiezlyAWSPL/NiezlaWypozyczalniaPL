@@ -11,6 +11,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.example.booksRenting.constants.TableConstants.*;
@@ -49,6 +50,13 @@ public class ReservationService {
         return bookRepository.findByUserIdAndSkStartsWith(user, SORT_KEY_BOOK).stream()
                 .filter(b -> b.getStatus().equals(BOOK_RESERVED_STATUS))
                 .filter(b -> b.getReservationExpireDate().isAfter(LocalDateTime.now()))
+                .map(bookMappingService::mapToBookDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<BookDTO> getFilteredReservations(String titlePhase) {
+        var assuredCorrectTitlePhase = Optional.ofNullable(titlePhase).orElse("");
+        return bookRepository.findByTitleLike(assuredCorrectTitlePhase).stream()
                 .map(bookMappingService::mapToBookDTO)
                 .collect(Collectors.toList());
     }

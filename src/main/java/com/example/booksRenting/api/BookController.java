@@ -5,6 +5,8 @@ import com.example.booksRenting.dto.book.CreateBookRequestDTO;
 import com.example.booksRenting.service.BookService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/books")
 public class BookController {
@@ -28,5 +30,11 @@ public class BookController {
     @GetMapping
     public BookDTO getFirstAvailableByBookDefinition(@RequestParam("bookDefinitionId") String bookDefinitionId) {
         return bookService.findFirstAvailableByBookDefinitionId(bookDefinitionId);
+    }
+
+    @GetMapping("/filter/{titlePhase}")
+    public List<BookDTO> getFilteredBooks(@PathVariable String titlePhase) {
+        // todo
+        return List.of();
     }
 }
