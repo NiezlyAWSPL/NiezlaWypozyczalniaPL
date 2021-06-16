@@ -12,24 +12,37 @@
                 <div class="status">Status</div>
                 <div class="actions">Actions</div>
             </div>
-            <div class="book" *ngFor="let b of books" (click)="onBookClick(b)"
-                 [ngClass]="b == selectedBook && 'active'">
+            <div class="book" *ngFor="let b of books">
                 <div class="author">{{b.author}}</div>
                 <div class="title">{{b.title}}</div>
                 <div class="status">{{b.status}}</div>
                 <div class="actions">
-                    <a *ngIf="!isBookReserved(b) && !isBookRented(b)">Reserve</a>
-                    <a *ngIf="!isBookRented(b)">Rent</a>
-                    <a *ngIf="isBookRented(b)">Return</a>
+                    <a *ngIf="!isBookReserved(b) && !isBookRented(b)" (click)="onReserveClick(b)">Reserve</a>
+                    <a *ngIf="!isBookRented(b)" (click)="onRentClick(b)">Rent</a>
+                    <a *ngIf="isBookRented(b)" (click)="onReturnClick(b)">Return</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="rent-modal-bg" *ngIf="selectedBook">
+<!--    TODO INPUT DATA -->
+
+    <div class="reserve-modal-bg" *ngIf="showBookReservationForm">
+        <div class="reserve-modal">
+            <div class="description">
+                Are you sure you want to reserve <span>{{selectedBook.title}}</span>?
+            </div>
+            <div class="actions">
+                <button class="no" (click)="onReserveNoClick()">No</button>
+                <button class="yes" (click)="onReserveYesClick()">Yes</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="rent-modal-bg" *ngIf="showBookRentalForm">
         <div class="return-modal">
             <div class="description">
-                Are you sure you want to rent <span>{{selectedBook.title}}.</span>?
+                Are you sure you want to rent <span>{{selectedBook.title}}</span>?
             </div>
             <div class="actions">
                 <button class="no" (click)="onRentNoClick()">No</button>
@@ -38,10 +51,10 @@
         </div>
     </div>
 
-    <div class="return-modal-bg" *ngIf="selectedBook">
+    <div class="return-modal-bg" *ngIf="showBookReturnForm">
         <div class="return-modal">
             <div class="description">
-                Are you sure you want to return <span>{{selectedBook.title}}.</span>?
+                Are you sure you want to return <span>{{selectedBook.title}}</span>?
             </div>
             <div class="actions">
                 <button class="no" (click)="onReturnNoClick()">No</button>

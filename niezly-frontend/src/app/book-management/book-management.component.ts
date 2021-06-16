@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {BookDTO, BookFilterDTO, RentBookRequestDTO, ReturnBookRequestDTO} from "../dto/dto";
+import {BookDTO, BookFilterDTO, RentBookRequestDTO, ReserveBookRequestDTO, ReturnBookRequestDTO} from "../dto/dto";
 import {BookService} from "../service/book.service";
 import {RentalService} from "../service/rental.service";
+import {ReservationService} from "../service/reservation.service";
 
 @Component({
   selector: 'app-book-management',
@@ -11,7 +12,8 @@ import {RentalService} from "../service/rental.service";
 export class BookManagementComponent implements OnInit {
 
   constructor(private bookService: BookService,
-              private rentalService: RentalService) {
+              private rentalService: RentalService,
+              private reservationService: ReservationService) {
   }
 
   books: BookDTO[];
@@ -20,11 +22,16 @@ export class BookManagementComponent implements OnInit {
 
   titleStartsWith: string;
 
+  showBookReservationForm: boolean = false;
+  showBookRentalForm: boolean = false;
+  showBookReturnForm: boolean = false;
+
+
   ngOnInit(): void {
-    this.init();
+    this.fetchBooks();
   }
 
-  init() {
+  fetchBooks() {
     const bookFilter = new BookFilterDTO();
     bookFilter.titleStartsWith = this.titleStartsWith;
     bookFilter.libraryId = "TODO libraryId";
@@ -33,27 +40,61 @@ export class BookManagementComponent implements OnInit {
       this.loadedBooks = books;
       this.books = books;
     });
+
+    this.loadedBooks = this.books = [
+      { pk: "BOOK3", bookDefinitionId: "BOOKDEF3", author: "B.L.", title: "Don't matter", libraryId: "LIB1", userId: "user", status: "Available", rentedDate: "none", reservationBeginDate: "none", reservationExpireDate: "none", },
+      { pk: "BOOK4", bookDefinitionId: "BOOKDEF4", author: "L.L.", title: "How to play CS:GO", libraryId: "LIB1", userId: "user", status: "Available", rentedDate: "none", reservationBeginDate: "none", reservationExpireDate: "none", }
+    ];
   }
 
   isBookReserved(book: BookDTO) {
-    return false;
+    return book.status.includes("Reserved");
   }
 
   isBookRented(book: BookDTO) {
-    return false;
-  }
-
-  onBookClick(book: BookDTO) {
-    this.selectedBook = book;
+    return book.status.includes("Rented");
   }
 
   onFilterInput(value: string) {
     this.titleStartsWith = value;
-    this.books = this.loadedBooks.filter(b => b.title.startsWith(value));
+    this.books = this.loadedBooks.filter(b => b.title.startsWith(value)); // todo fetch filtered
+  }
+
+  onReserveClick(book: BookDTO) {
+    this.selectedBook = book;
+    this.showBookReservationForm = true;
+  }
+
+  onRentClick(book: BookDTO) {
+    this.selectedBook = book;
+    this.showBookRentalForm = true;
+  }
+
+  onReturnClick(book: BookDTO) {
+    this.selectedBook = book;
+    this.showBookReturnForm = true;
+  }
+
+  onReserveNoClick() {
+    this.selectedBook = null;
+    this.showBookReservationForm = false;
+  }
+
+  onReserveYesClick() {
+    const reserveRequest = new ReserveBookRequestDTO();
+    reserveRequest.pk = this.selectedBook.pk;
+    reserveRequest.user = "currentUser";
+
+    this.reservationService.reserveBook(reserveRequest).subscribe(() => {
+      this.showBookReservationForm = false;
+      this.selectedBook = null;
+      this.fetchBooks();
+    });
   }
 
   onRentNoClick() {
     this.selectedBook = null;
+    this.showBookRentalForm = false;
   }
 
   onRentYesClick() {
@@ -61,15 +102,16 @@ export class BookManagementComponent implements OnInit {
     rentRequest.pk = this.selectedBook.pk;
     rentRequest.user = "TODO user";
 
-    this.rentalService.rentBook(rentRequest)
-        .subscribe(() => {
-          this.books = this.books.filter(b => b.pk != this.selectedBook.pk);
-          this.selectedBook = null;
-        })
+    this.rentalService.rentBook(rentRequest).subscribe(() => {
+      this.showBookRentalForm = false;
+      this.selectedBook = null;
+      this.fetchBooks();
+    });
   }
 
   onReturnNoClick() {
     this.selectedBook = null;
+    this.showBookReturnForm = false;
   }
 
   onReturnYesClick() {
@@ -77,9 +119,10 @@ export class BookManagementComponent implements OnInit {
     returnRequest.pk = this.selectedBook.pk;
 
     this.rentalService.returnBook(returnRequest)
-        .subscribe(() => {
-          this.selectedBook = null;
-          this.init();
-        })
+    .subscribe(() => {
+      this.showBookReturnForm = false;
+      this.selectedBook = null;
+      this.fetchBooks();
+    })
   }
 }

@@ -88,13 +88,20 @@
           background: #eee;
           color: #000;
         }
+
+        a {
+          color: #3ea0dc;
+          font-weight: bolder;
+          margin: 4px;
+        }
       }
 
     }
   }
 
   .return-modal-bg,
-  .rent-modal-bg {
+  .rent-modal-bg,
+  .reserve-modal-bg {
     position: fixed;
     top: 0;
     left: 0;
@@ -105,7 +112,8 @@
     place-items: center;
 
     .return-modal,
-    .rent-modal {
+    .rent-modal,
+    .reserve-modal {
       background: #fff;
       width: 400px;
       padding: 50px;
