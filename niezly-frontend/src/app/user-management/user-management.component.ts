@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {BookDTO, BookFilterDTO, RentBookRequestDTO, ReturnBookRequestDTO, UserDTO} from "../dto/dto";
+import {BookService} from "../service/book.service";
+import {RentalService} from "../service/rental.service";
+import {UserService} from "../service/user.service";
 
 @Component({
   selector: 'app-user-management',
@@ -7,9 +11,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserManagementComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private userService: UserService,
+              private rentalService: RentalService) {
   }
 
+  users: UserDTO[];
+  selectedUser: UserDTO;
+  loadedUsers: UserDTO[];
+
+  loginPhase: string;
+
+  ngOnInit(): void {
+    this.users = this.loadedUsers = [];
+    this.loginPhase = "";
+    this.init();
+  }
+
+  init() {
+    this.userService.getUsers(this.loginPhase).subscribe(users => {
+      this.loadedUsers = users;
+      this.users = users;
+    });
+  }
+
+  onUserClick(user: UserDTO) {
+    this.selectedUser = user;
+  }
+
+  onFilterInput(value: string) {
+    this.loginPhase = value;
+    this.users = this.users.filter(u => u.login.startsWith(value));
+  }
 }
