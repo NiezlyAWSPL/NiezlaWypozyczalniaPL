@@ -4,4 +4,10 @@ export class HeaderConstants {
     static HEADER_AUTHORIZATION = 'Authorization'
 
     static BEARER_PREFIX = 'Bearer '
+
+}
+
+export class RoleConstants {
+
+    static ROLE_LIBRARIAN = 'librarian'
 }

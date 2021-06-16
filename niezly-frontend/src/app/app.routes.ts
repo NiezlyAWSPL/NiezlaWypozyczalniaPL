@@ -4,6 +4,7 @@ import {RentalComponent} from "./rental/rental.component";
 import {MainComponent} from "./main/main.component";
 import {AdminComponent} from "./admin/admin.component";
 import {ReservationComponent} from "./reservation/reservation.component";
+import {AuthGuard} from "../guards/auth-guard";
 
 export const routes: Routes = [
     {
@@ -24,6 +25,7 @@ export const routes: Routes = [
             },
             {
                 path: 'admin',
+                canActivate: [AuthGuard],
                 component: AdminComponent
             }
         ]

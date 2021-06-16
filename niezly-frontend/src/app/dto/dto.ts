@@ -74,4 +74,5 @@ export class RentalDTO {
 export class UserDTO {
     guid: string;
     login: string;
+    authorities: string[];
 }
