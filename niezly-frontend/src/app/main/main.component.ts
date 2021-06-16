@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common'
 import {ActivatedRoute} from "@angular/router";
 import {HeaderConstants} from "../dto/constants";
+import {Constants} from "../utils/constants";
 
 @Component({
     selector: 'app-main',
@@ -13,6 +14,8 @@ export class MainComponent implements OnInit {
     constructor(private activatedRoute: ActivatedRoute,
                 private location: Location) {
     }
+
+    loginUri = Constants.LOGIN_URI;
 
     ngOnInit(): void {
         this.activatedRoute.fragment

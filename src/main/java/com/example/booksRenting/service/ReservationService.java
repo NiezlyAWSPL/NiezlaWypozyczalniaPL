@@ -11,7 +11,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.example.booksRenting.constants.TableConstants.*;
@@ -21,13 +20,15 @@ public class ReservationService {
 
     private final BookRepository bookRepository;
     private final BookMappingService bookMappingService;
+    private final BookService bookService;
     private final long reservationDurationSeconds;
 
     public ReservationService(BookRepository bookRepository,
                               BookMappingService bookMappingService,
-                              @Value("${reservation.duration}") String reservationDuration) {
+                              BookService bookService, @Value("${reservation.duration}") String reservationDuration) {
         this.bookRepository = bookRepository;
         this.bookMappingService = bookMappingService;
+        this.bookService = bookService;
         this.reservationDurationSeconds = Duration.parse(reservationDuration).getSeconds();
     }
 
@@ -36,8 +37,12 @@ public class ReservationService {
     }
 
     @Transactional
-    public BookDTO reserveBook(String pk, String userId) {
-        var book = bookRepository.findByPkAndSk(pk, SORT_KEY_BOOK).orElseThrow();
+    public BookDTO reserveBook(String bookDefinitionId, String userId) {
+        var book = bookRepository
+                .findFirstByBookDefinitionIdAndReservedTillTimeStampLessThan(
+                        bookDefinitionId,
+                        Instant.now().getEpochSecond()
+                ).orElseThrow();
         book.setUserId(userId);
         book.setReservationBeginDate(LocalDateTime.now());
         book.setReservationExpireDate(getReservationExpireDate(book.getReservationBeginDate()));

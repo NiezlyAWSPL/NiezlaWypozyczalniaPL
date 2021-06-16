@@ -1,5 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {BookDefinitionDTO, BookDefinitionFilterDTO, LibraryDTO, RentBookRequestDTO} from "../dto/dto";
+import {
+  BookDefinitionDTO,
+  BookDefinitionFilterDTO,
+  LibraryDTO,
+  RentBookRequestDTO,
+  ReserveBookRequestDTO
+} from "../dto/dto";
 import {BookService} from "../service/book.service";
 import {ReservationService} from "../service/reservation.service";
 import {UserService} from "../service/user.service";
@@ -43,7 +49,7 @@ export class BooksComponent implements OnInit {
   fetchLibraries() {
     this.libraryService.getAllLibraries().subscribe(libraries => {
       this.libraries = libraries;
-      this.selectedLibraryName = "";
+      this.selectedLibraryName = libraries[0].name;
     });
   }
 
@@ -65,6 +71,11 @@ export class BooksComponent implements OnInit {
     this.selectedBook = book;
   }
 
+  onLibrarySelect(ev: any) {
+    this.selectedLibraryName = ev.target.value;
+    this.fetchBooks();
+  }
+
   onFilterInput(value: string) {
     this.titlePhase = value;
     this.fetchBooks();
@@ -75,9 +86,8 @@ export class BooksComponent implements OnInit {
   }
 
   onReserveYesClick() {
-    const reserveRequest = new RentBookRequestDTO();
-    reserveRequest.pk = this.selectedBook.id;
-    reserveRequest.user = this.currentUserLogin;
+    const reserveRequest = new ReserveBookRequestDTO();
+    reserveRequest.bookDefinitionId = this.selectedBook.id;
 
     this.reservationService.reserveBook(reserveRequest).subscribe(() => {
       this.selectedBook = null;

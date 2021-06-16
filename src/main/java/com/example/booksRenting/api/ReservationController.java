@@ -6,6 +6,7 @@ import com.example.booksRenting.service.ReservationService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -19,8 +20,8 @@ public class ReservationController {
     }
 
     @PostMapping
-    public BookDTO reserveBook(@RequestBody ReserveBookRequestDTO requestDTO) {
-        return reservationService.reserveBook(requestDTO.getPk(), requestDTO.getUser());
+    public BookDTO reserveBook(@RequestBody ReserveBookRequestDTO requestDTO, Principal principal) {
+        return reservationService.reserveBook(requestDTO.getBookDefinitionId(), principal.getName());
     }
 
     @GetMapping

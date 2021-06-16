@@ -1,0 +1,11 @@
+.topMenu__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .login-uri {
+    margin-left: auto;
+    margin-right: 20px;
+    font-size: 1.5em;
+  }
+}

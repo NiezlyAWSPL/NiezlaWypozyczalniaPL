@@ -33,8 +33,7 @@ export class ReturnBookRequestDTO {
 }
 
 export class ReserveBookRequestDTO {
-    pk: string;
-    user: string;
+    bookDefinitionId: string;
 }
 
 export class BookDefinitionDTO {

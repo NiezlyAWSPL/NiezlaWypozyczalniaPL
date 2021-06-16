@@ -47,6 +47,14 @@ public class BookDefinitionService {
         int pageNumber = (int)(filterDTO.getSkip() / filterDTO.getTake());
         var pageable = PageRequest.of(pageNumber, filterDTO.getTake());
 
+        if(filterDTO.getTitlePrefix().isEmpty()) {
+            return bookDefinitionRepository.findByPk(
+                    filterDTO.getLibraryId(),
+                    pageable).stream()
+                    .map(bookDefinitionMappingService::mapToBookDefinitionDTO)
+                    .collect(Collectors.toList());
+        }
+
         return bookDefinitionRepository.findByPkAndSkStartsWith(
                 filterDTO.getLibraryId(),
                 filterDTO.getTitlePrefix().toLowerCase(),

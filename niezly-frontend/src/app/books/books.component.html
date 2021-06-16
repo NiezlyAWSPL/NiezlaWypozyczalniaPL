@@ -2,7 +2,7 @@
 
     <div class="books">
         <div class="library-select">
-            <select [(ngModel)]="selectedLibraryName" (ngModelChange)="fetchBooks()">
+            <select [(ngModel)]="selectedLibraryName" (change)="onLibrarySelect($event)">
                 <option *ngFor="let l of libraries">{{l.name}}</option>
             </select>
         </div>
@@ -15,7 +15,6 @@
             <div class="labels">
                 <div class="author">Author</div>
                 <div class="title">Title</div>
-                <div class="status">Status</div>
                 <div class="actions">Actions</div>
             </div>
             <div class="book" *ngFor="let b of books" (click)="onBookClick(b)"
