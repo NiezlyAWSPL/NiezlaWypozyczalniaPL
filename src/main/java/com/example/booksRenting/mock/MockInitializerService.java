@@ -57,12 +57,12 @@ public class MockInitializerService implements ApplicationRunner {
         var libraryOne = libraryRepository.findByPk(HASH_KEY_LIBRARY);
         var rand = new Random();
         var requests = List.of(
-                new CreateBookRequestDTO("niezlyautor1", "niezlytytul1", libraryOne.get(rand.nextInt(libraryOne.size())).getPk()),
-                new CreateBookRequestDTO("niezlyautor2", "niezlytytul2", libraryOne.get(rand.nextInt(libraryOne.size())).getPk()),
-                new CreateBookRequestDTO("niezlyautor3", "niezlytytul3", libraryOne.get(rand.nextInt(libraryOne.size())).getPk()),
-                new CreateBookRequestDTO("niezlyautor4", "niezlytytul4", libraryOne.get(rand.nextInt(libraryOne.size())).getPk()),
-                new CreateBookRequestDTO("niezlyautor5", "niezlytytul5", libraryOne.get(rand.nextInt(libraryOne.size())).getPk()),
-                new CreateBookRequestDTO("niezlyautor6", "niezlytytul6", libraryOne.get(rand.nextInt(libraryOne.size())).getPk())
+                new CreateBookRequestDTO("niezlyautor1", "niezlytytul1", libraryOne.get(rand.nextInt(libraryOne.size())).getSk()),
+                new CreateBookRequestDTO("niezlyautor2", "niezlytytul2", libraryOne.get(rand.nextInt(libraryOne.size())).getSk()),
+                new CreateBookRequestDTO("niezlyautor3", "niezlytytul3", libraryOne.get(rand.nextInt(libraryOne.size())).getSk()),
+                new CreateBookRequestDTO("niezlyautor4", "niezlytytul4", libraryOne.get(rand.nextInt(libraryOne.size())).getSk()),
+                new CreateBookRequestDTO("niezlyautor5", "niezlytytul5", libraryOne.get(rand.nextInt(libraryOne.size())).getSk()),
+                new CreateBookRequestDTO("niezlyautor6", "niezlytytul6", libraryOne.get(rand.nextInt(libraryOne.size())).getSk())
         );
         requests.forEach(bookService::createBook);
     }
