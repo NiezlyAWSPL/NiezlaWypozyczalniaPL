@@ -10,7 +10,8 @@
     text-align: center;
   }
 
-  .rentals {
+  .rentals,
+  .reservations {
     padding: 20px;
     width: 50%;
     align-items: center;
@@ -41,8 +42,9 @@
       }
     }
 
-    .rentals-container {
-      width: 60%;
+    .rentals-container,
+    .reservations-container {
+      width: 90%;
       padding: 15px;
       border-radius: 15px;
       background: #fff;
@@ -58,6 +60,10 @@
         .name {
           margin-left: auto;
         }
+
+        .actions {
+          margin-left: auto;
+        }
       }
 
       .labels {
@@ -65,7 +71,8 @@
         color: #000;
       }
 
-      .rental {
+      .rental,
+      .reservation {
         padding-top: 10px;
         padding-bottom: 10px;
         border-top: 1px solid #ddd;

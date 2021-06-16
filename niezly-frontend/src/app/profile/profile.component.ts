@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {BookDTO, RentalDTO} from "../dto/dto";
 import {RentalService} from "../service/rental.service";
+import {ReservationService} from "../service/reservation.service";
 
 @Component({
   selector: 'app-rentals',
@@ -11,21 +12,29 @@ import {RentalService} from "../service/rental.service";
 export class ProfileComponent implements OnInit {
 
   constructor(private router: Router,
-              private rentalService: RentalService) {
+              private rentalService: RentalService,
+              private reservationService: ReservationService) {
   }
 
   loadedRentals: RentalDTO[];
   rentals: RentalDTO[];
   selectedRental: RentalDTO;
 
+  reservations: BookDTO[];
+
   showReturnModal: boolean = false;
 
   ngOnInit(): void {
-    this.rentalService.getUserOldRentals("user") // todo proper user name
-        .subscribe(rentals => {
-          this.loadedRentals = rentals;
-          this.rentals = rentals;
-        })
+    // todo proper usernames
+
+    this.rentalService.getUserOldRentals("user").subscribe(rentals => {
+      this.loadedRentals = rentals;
+      this.rentals = rentals;
+    });
+
+    this.reservationService.getReservations("user").subscribe(reservations => {
+      this.reservations = reservations;
+    });
   }
 
   onRentalClick(rental: RentalDTO) {
