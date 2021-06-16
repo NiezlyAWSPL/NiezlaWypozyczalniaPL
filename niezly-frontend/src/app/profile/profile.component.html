@@ -16,6 +16,23 @@
         </div>
     </div>
 
+    <div class="reservations">
+        <div class="header">Your reservations</div>
+
+        <div class="reservations-container">
+            <div class="labels">
+                <div>Title</div>
+                <div class="name">Author</div>
+                <div class="actions">Actions</div>
+            </div>
+            <div class="rental" *ngFor="let r of reservations">
+                <div class="id">{{r.title}}</div>
+                <div class="name">{{r.author}}</div>
+                <div class="actions"><a>Cancel</a></div>
+            </div>
+        </div>
+    </div>
+
     <div class="return-modal-bg" *ngIf="showReturnModal">
         <div class="return-modal">
             <div class="description">
