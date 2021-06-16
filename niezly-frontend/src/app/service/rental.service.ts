@@ -31,15 +31,29 @@ export class RentalService {
         });
     }
 
-    getCurrentRentedBookByUser(user: string): Observable<BookDTO[]> {
+    getCurrentRentedBooksByLoggedUser(): Observable<BookDTO[]> {
+        return this.http.get<BookDTO[]>(`/api/books/rented/loggedUser`, {
+            headers: this.sessionService.getHeaders()
+        });
+    }
+
+    getCurrentRentedBooksByUser(user: string): Observable<BookDTO[]> {
         return this.http.get<BookDTO[]>(`/api/books/rented/`, {
             params: new HttpParams().set('user', user),
             headers: this.sessionService.getHeaders()
         });
     }
 
+    getLoggedUserOldRentals(): Observable<RentalDTO[]> {
+        return this.http.get<RentalDTO[]>(`/api/books/rented/loggedUser/old`,
+            {
+                headers: this.sessionService.getHeaders()
+            }
+        );
+    }
+
     getUserOldRentals(user: string): Observable<RentalDTO[]> {
-        return this.http.get<RentalDTO[]>(`/api/books/rented/`,
+        return this.http.get<RentalDTO[]>(`/api/books/rented/old`,
             {
                 params: new HttpParams().set('user', user),
                 headers: this.sessionService.getHeaders()

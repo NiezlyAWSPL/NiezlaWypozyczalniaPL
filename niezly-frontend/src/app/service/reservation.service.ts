@@ -15,6 +15,11 @@ export class ReservationService {
         return this.http.post<BookDTO>(`/api/books/reserved`, request, {headers: this.sessionService.getHeaders()});
     }
 
+    getLoggedReservations(): Observable<BookDTO[]> {
+        return this.http.get<BookDTO[]>(`/api/books/reserved/loggedUser`, {
+            headers: this.sessionService.getHeaders()
+        });
+    }
     getReservations(user: string): Observable<BookDTO[]> {
         return this.http.get<BookDTO[]>(`/api/books/reserved`, {
             params: new HttpParams().set('user', user),
