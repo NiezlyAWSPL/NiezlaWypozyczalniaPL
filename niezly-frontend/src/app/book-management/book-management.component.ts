@@ -107,8 +107,7 @@ export class BookManagementComponent implements OnInit {
 
   onReserveYesClick() {
     const reserveRequest = new ReserveBookRequestDTO();
-    reserveRequest.pk = this.selectedBook.id;
-    reserveRequest.user = this.userLogin;
+    reserveRequest.bookDefinitionId = this.selectedBook.id;
 
     this.reservationService.reserveBook(reserveRequest).subscribe(() => {
       this.showBookReservationForm = false;
