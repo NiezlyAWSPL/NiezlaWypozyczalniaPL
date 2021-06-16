@@ -35,6 +35,14 @@ export class BookManagementComponent implements OnInit {
     });
   }
 
+  isBookReserved(book: BookDTO) {
+    return false;
+  }
+
+  isBookRented(book: BookDTO) {
+    return false;
+  }
+
   onBookClick(book: BookDTO) {
     this.selectedBook = book;
   }

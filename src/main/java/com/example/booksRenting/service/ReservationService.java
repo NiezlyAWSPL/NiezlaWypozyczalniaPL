@@ -54,13 +54,6 @@ public class ReservationService {
                 .collect(Collectors.toList());
     }
 
-    public List<BookDTO> getFilteredReservations(String titlePhase) {
-        var assuredCorrectTitlePhase = Optional.ofNullable(titlePhase).orElse("");
-        return bookRepository.findByTitleLike(assuredCorrectTitlePhase).stream()
-                .map(bookMappingService::mapToBookDTO)
-                .collect(Collectors.toList());
-    }
-
     public BookDTO cancelReservation(String pk) {
         var book = bookRepository.findByPkAndSk(pk, SORT_KEY_BOOK).orElseThrow();
 

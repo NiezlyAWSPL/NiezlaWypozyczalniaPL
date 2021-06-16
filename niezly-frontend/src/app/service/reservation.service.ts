@@ -19,6 +19,10 @@ export class ReservationService {
     }
 
     cancelReservation(pk: number): Observable<BookDTO> {
-        return this.http.delete<BookDTO>(`/api/books/reserved${pk}`);
+        return this.http.delete<BookDTO>(`/api/books/reserved/${pk}`);
+    }
+
+    getFilteredReservations(titlePhase: string): Observable<BookDTO> {
+        return this.http.get<BookDTO>(`/api/books/reserved/${titlePhase}`);
     }
 }

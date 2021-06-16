@@ -3,6 +3,7 @@ package com.example.booksRenting.mock;
 import com.example.booksRenting.dto.book.CreateBookRequestDTO;
 import com.example.booksRenting.dto.library.CreateLibraryRequestDTO;
 import com.example.booksRenting.repository.BookRepository;
+import com.example.booksRenting.repository.BookScanRepository;
 import com.example.booksRenting.repository.LibraryRepository;
 import com.example.booksRenting.service.BookService;
 import com.example.booksRenting.service.LibraryService;
@@ -27,7 +28,7 @@ public class MockInitializerService implements ApplicationRunner {
 
     private final LibraryService libraryService;
     private final BookService bookService;
-    private final BookRepository bookRepository;
+    private final BookScanRepository bookScanRepository;
     private final LibraryRepository libraryRepository;
 
     @Override
@@ -38,8 +39,7 @@ public class MockInitializerService implements ApplicationRunner {
     }
 
     private void purge() {
-        libraryRepository.deleteAll();
-        bookRepository.deleteAll();
+        bookScanRepository.deleteAll();
     }
 
     private void initializeLibraries() {

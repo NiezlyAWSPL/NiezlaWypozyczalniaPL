@@ -7,7 +7,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
 
-@EnableScan
 public interface LibraryRepository extends PagingAndSortingRepository<Library, BaseEntity.BaseEntityId> {
     List<Library> findByPk(String pk);
 }

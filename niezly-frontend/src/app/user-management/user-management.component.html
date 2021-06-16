@@ -1,1 +1,27 @@
-<p>user management works!</p>
+<div class="user-management-component">
+
+    <div class="users">
+        <div class="header">Select a user to view his status and take actions</div>
+
+        <div class="filter">
+            <input id="filter-users" value="{{loginPhase}}" type="text" #v placeholder="Filter" (input)="onFilterInput(v.value)">
+        </div>
+
+        <div class="users-container">
+            <div class="labels">
+                <div class="guid">ID</div>
+                <div class="login">Login</div>
+            </div>
+            <div class="user" *ngFor="let u of users" (click)="onUserClick(u)"
+                 [ngClass]="u == selectedUser && 'active'">
+                <div class="guid">{{u.guid}}</div>
+                <div class="login">{{u.login}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="user-details">
+
+    </div>
+
+</div>

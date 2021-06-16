@@ -33,4 +33,8 @@ export class RentalService {
     return this.http.get<RentalDTO[]>(`/api/books/rented/`, { params: new HttpParams().set('user', user) });
   }
 
+  getFilteredRentals(titlePhase: string): Observable<RentalDTO[]> {
+    return this.http.get<RentalDTO[]>(`/api/books/rented/filter/${titlePhase}`);
+  }
+
 }

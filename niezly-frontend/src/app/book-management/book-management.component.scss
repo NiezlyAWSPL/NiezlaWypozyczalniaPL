@@ -12,7 +12,7 @@
 
   .books {
     padding: 20px;
-    width: 50%;
+    width: 100%;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -42,7 +42,7 @@
     }
 
     .books-container {
-      width: 60%;
+      width: 100%;
       padding: 15px;
       border-radius: 15px;
       background: #fff;
@@ -55,8 +55,20 @@
         padding-left: 10px;
         padding-right: 10px;
 
-        .name {
-          margin-left: auto;
+        .author {
+          margin: auto;
+        }
+
+        .title {
+          margin: auto;
+        }
+
+        .status {
+          margin: auto;
+        }
+
+        .actions {
+          margin: auto;
         }
       }
 
