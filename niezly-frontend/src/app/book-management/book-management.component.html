@@ -1,21 +1,27 @@
 <div class="book-management-component">
 
     <div class="books">
-        <div class="header">Choose a book to view available actions</div>
-
         <div class="filter">
             <input id="filter-books" value="{{titleStartsWith}}" type="text" #v placeholder="Filter" (input)="onFilterInput(v.value)">
         </div>
 
         <div class="books-container">
             <div class="labels">
-                <div>Id</div>
-                <div class="name">Name</div>
+                <div class="author">Author</div>
+                <div class="title">Title</div>
+                <div class="status">Status</div>
+                <div class="actions">Actions</div>
             </div>
             <div class="book" *ngFor="let b of books" (click)="onBookClick(b)"
                  [ngClass]="b == selectedBook && 'active'">
-                <div class="id">{{b.author}}</div>
-                <div class="name">{{b.title}}</div>
+                <div class="author">{{b.author}}</div>
+                <div class="title">{{b.title}}</div>
+                <div class="status">{{b.status}}</div>
+                <div class="actions">
+                    <a *ngIf="!isBookReserved(b) && !isBookRented(b)">Reserve</a>
+                    <a *ngIf="!isBookRented(b)">Rent</a>
+                    <a *ngIf="isBookRented(b)">Return</a>
+                </div>
             </div>
         </div>
     </div>
