@@ -1,8 +1,14 @@
 <div class="book-management-component">
 
     <div class="books">
+        <div class="library-select">
+            <select [(ngModel)]="selectedLibrary">
+                <option *ngFor="let l of libraries">{{l.name}}</option>
+            </select>
+        </div>
+
         <div class="filter">
-            <input id="filter-books" value="{{titleStartsWith}}" type="text" #v placeholder="Filter" (input)="onFilterInput(v.value)">
+            <input id="filter-books" value="{{titlePhase}}" type="text" #v placeholder="Filter" (input)="onFilterInput(v.value)">
         </div>
 
         <div class="books-container">

@@ -1,8 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {BookDTO, BookFilterDTO, RentBookRequestDTO, ReserveBookRequestDTO, ReturnBookRequestDTO} from "../dto/dto";
+import {Component, OnInit} from '@angular/core';
+import {BookDTO, LibraryDTO, RentBookRequestDTO, ReserveBookRequestDTO, ReturnBookRequestDTO} from "../dto/dto";
 import {BookService} from "../service/book.service";
 import {RentalService} from "../service/rental.service";
 import {ReservationService} from "../service/reservation.service";
+import {LibraryService} from "../service/library.service";
+import {Constants} from "../utils/constants";
 
 @Component({
   selector: 'app-book-management',
@@ -13,14 +15,18 @@ export class BookManagementComponent implements OnInit {
 
   constructor(private bookService: BookService,
               private rentalService: RentalService,
-              private reservationService: ReservationService) {
+              private reservationService: ReservationService,
+              private libraryService: LibraryService) {
   }
 
   books: BookDTO[];
   selectedBook: BookDTO;
   loadedBooks: BookDTO[];
 
-  titleStartsWith: string;
+  libraries: LibraryDTO[];
+  selectedLibrary: LibraryDTO;
+
+  titlePhase: string;
 
   showBookReservationForm: boolean = false;
   showBookRentalForm: boolean = false;
@@ -29,23 +35,32 @@ export class BookManagementComponent implements OnInit {
   userLogin: string;
 
   ngOnInit(): void {
+    this.fetchLibraries();
     this.fetchBooks();
   }
 
-  fetchBooks() {
-    const bookFilter = new BookFilterDTO();
-    bookFilter.titleStartsWith = this.titleStartsWith;
-    bookFilter.libraryId = "TODO libraryId";
+  fetchLibraries() {
+    this.libraryService.getAllLibraries().subscribe(libraries => {
+      this.libraries = libraries;
+      this.selectedLibrary = null;
+    });
+  }
 
-    this.bookService.getBooks(bookFilter).subscribe(books => {
+  fetchBooks() {
+    this.bookService.getFilteredBooks(this.titlePhase).subscribe(books => {
       this.loadedBooks = books;
       this.books = books;
     });
 
-    this.loadedBooks = this.books = [
-      { pk: "BOOK3", bookDefinitionId: "BOOKDEF3", author: "B.L.", title: "Don't matter", libraryId: "LIB1", userId: "user", status: "Available", rentedDate: "none", reservationBeginDate: "none", reservationExpireDate: "none", },
-      { pk: "BOOK4", bookDefinitionId: "BOOKDEF4", author: "L.L.", title: "How to play CS:GO", libraryId: "LIB1", userId: "user", status: "Available", rentedDate: "none", reservationBeginDate: "none", reservationExpireDate: "none", }
-    ];
+    // this.loadedBooks = this.books = [
+    //   { pk: "BOOK3", bookDefinitionId: "BOOKDEF3", author: "B.L.", title: "Don't matter", libraryId: "LIB1", userId: "user", status: "Available", rentedDate: "none", reservationBeginDate: "none", reservationExpireDate: "none", },
+    //   { pk: "BOOK4", bookDefinitionId: "BOOKDEF4", author: "L.L.", title: "How to play CS:GO", libraryId: "LIB1", userId: "user", status: "Available", rentedDate: "none", reservationBeginDate: "none", reservationExpireDate: "none", }
+    // ];
+  }
+
+  setSelectedLibrary(event: any) {
+    console.log(event);
+    this.selectedLibrary = event;
   }
 
   setRentingUserLogin(event: any) {
@@ -53,16 +68,16 @@ export class BookManagementComponent implements OnInit {
   }
 
   isBookReserved(book: BookDTO) {
-    return book.status.includes("Reserved");
+    return book.status.includes(Constants.BOOK_RESERVED_STATUS);
   }
 
   isBookRented(book: BookDTO) {
-    return book.status.includes("Rented");
+    return book.status.includes(Constants.BOOK_RENTED_STATUS);
   }
 
   onFilterInput(value: string) {
-    this.titleStartsWith = value;
-    this.books = this.loadedBooks.filter(b => b.title.startsWith(value)); // todo fetch filtered
+    this.titlePhase = value;
+    this.fetchBooks();
   }
 
   onReserveClick(book: BookDTO) {
@@ -123,8 +138,7 @@ export class BookManagementComponent implements OnInit {
     const returnRequest = new ReturnBookRequestDTO();
     returnRequest.pk = this.selectedBook.pk;
 
-    this.rentalService.returnBook(returnRequest)
-    .subscribe(() => {
+    this.rentalService.returnBook(returnRequest).subscribe(() => {
       this.showBookReturnForm = false;
       this.selectedBook = null;
       this.fetchBooks();

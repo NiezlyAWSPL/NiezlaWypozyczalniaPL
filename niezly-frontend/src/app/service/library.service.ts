@@ -14,4 +14,8 @@ export class LibraryService {
     return this.http.post<LibraryDTO>('/api/libraries', createLibraryRequestDTO);
   }
 
+  getAllLibraries(): Observable<LibraryDTO[]> {
+    return this.http.get<LibraryDTO[]>(`/api/libraries`);
+  }
+
 }

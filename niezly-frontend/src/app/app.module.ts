@@ -10,6 +10,7 @@ import {routes} from "./app.routes";
 import {BookManagementComponent} from "./book-management/book-management.component";
 import {UserManagementComponent} from "./user-management/user-management.component";
 import { HttpClientModule } from '@angular/common/http';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     imports: [
         RouterModule.forRoot(routes),
         BrowserModule,
-        HttpClientModule
+        HttpClientModule,
+        FormsModule
     ],
     providers: [],
     bootstrap: [AppComponent]

@@ -17,11 +17,13 @@
     display: flex;
     flex-direction: column;
 
-    .filter {
+    .filter,
+    .library-select {
       width: 60%;
       margin-bottom: 20px;
 
-      input {
+      input,
+      select {
         width: 100%;
         padding: 10px;
         border-radius: 3px;
