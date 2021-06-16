@@ -21,10 +21,10 @@ export class BooksComponent implements OnInit {
   titlePhase: string;
 
   ngOnInit(): void {
-    this.fetchBooksByFilter();
+    this.fetchBooks();
   }
 
-  fetchBooksByFilter() {
+  fetchBooks() {
     const bookFilter = new BookFilterDTO();
     bookFilter.titleStartsWith = this.titlePhase;
     bookFilter.libraryId = "LIB1";
@@ -46,7 +46,7 @@ export class BooksComponent implements OnInit {
 
   onFilterInput(value: string) {
     this.titlePhase = value;
-    this.books = this.loadedBooks.filter(b => b.title.startsWith(value));
+    this.fetchBooks();
   }
 
   onReserveNoClick() {
@@ -60,6 +60,7 @@ export class BooksComponent implements OnInit {
 
     this.reservationService.reserveBook(reserveRequest).subscribe(() => {
       this.selectedBook = null;
+      this.fetchBooks();
     });
   }
 }
