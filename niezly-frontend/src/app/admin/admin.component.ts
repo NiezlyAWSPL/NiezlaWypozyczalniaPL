@@ -1,8 +1,10 @@
 import {Component} from '@angular/core';
-import {BookDTO, RentalDTO, RentBookRequestDTO, ReturnBookRequestDTO} from "../dto/dto";
+import {BookDTO, CreateBookRequestDTO, LibraryDTO, RentalDTO, RentBookRequestDTO} from "../dto/dto";
 import {RentalService} from "../service/rental.service";
 import {UserService} from "../service/user.service";
 import {ReservationService} from "../service/reservation.service";
+import {LibraryService} from "../service/library.service";
+import {BookService} from "../service/book.service";
 
 @Component({
   selector: 'app-admin',
@@ -12,12 +14,15 @@ import {ReservationService} from "../service/reservation.service";
 export class AdminComponent {
 
   constructor(private userService: UserService,
+              private bookService: BookService,
               private reservationService: ReservationService,
-              private rentalService: RentalService) {
+              private rentalService: RentalService,
+              private libraryService: LibraryService) {
   }
 
   login: string = "";
 
+  libraries: LibraryDTO[] = [];
   rentals: RentalDTO[] = [];
   reservations: BookDTO[] = [];
 
@@ -27,11 +32,16 @@ export class AdminComponent {
   showBookRentalForm: boolean = false;
   showBookReturnDialog: boolean = false;
   showReservationCancelDialog: boolean = false;
+  showAddBookForm: boolean = false;
 
-  loadUserData(userLogin: string) {
+  fetchUserData(userLogin: string) {
     this.login = userLogin;
     this.reservationService.getReservations(userLogin).subscribe(reservations => this.reservations = reservations);
     this.rentalService.getUserOldRentals(userLogin).subscribe(rentals => this.rentals = rentals);
+  }
+
+  fetchLibraries() {
+    this.libraryService.getAllLibraries().subscribe(libraries => this.libraries = libraries);
   }
 
   openReturnDialog(rental: RentalDTO) {
@@ -46,6 +56,11 @@ export class AdminComponent {
   openReservationCancelDialog(reservation: BookDTO) {
     this.selectedReservation = reservation;
     this.showReservationCancelDialog = true;
+  }
+
+  openAddBookForm() {
+    this.showAddBookForm = true;
+    this.fetchLibraries();
   }
 
   onRentalYesClick(bookId: string) {
@@ -87,4 +102,21 @@ export class AdminComponent {
       this.selectedReservation = null;
     });
   }
+
+  onAddBookNoClick() {
+    this.showAddBookForm = false;
+  }
+
+  onAddBookYesClick(libraryId: string, title: string, author: string) {
+    const createBookRequest: CreateBookRequestDTO = {
+      libraryId: libraryId,
+      title: title,
+      author: author
+    };
+
+    this.bookService.createBook(createBookRequest).subscribe(_ => {
+      this.showAddBookForm = false;
+    })
+  }
+
 }
