@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {BookDTO, BookFilterDTO, RentBookRequestDTO, ReserveBookRequestDTO, ReturnBookRequestDTO} from "../dto/dto";
 import {BookService} from "../service/book.service";
 import {RentalService} from "../service/rental.service";
@@ -26,6 +26,7 @@ export class BookManagementComponent implements OnInit {
   showBookRentalForm: boolean = false;
   showBookReturnForm: boolean = false;
 
+  userLogin: string;
 
   ngOnInit(): void {
     this.fetchBooks();
@@ -45,6 +46,10 @@ export class BookManagementComponent implements OnInit {
       { pk: "BOOK3", bookDefinitionId: "BOOKDEF3", author: "B.L.", title: "Don't matter", libraryId: "LIB1", userId: "user", status: "Available", rentedDate: "none", reservationBeginDate: "none", reservationExpireDate: "none", },
       { pk: "BOOK4", bookDefinitionId: "BOOKDEF4", author: "L.L.", title: "How to play CS:GO", libraryId: "LIB1", userId: "user", status: "Available", rentedDate: "none", reservationBeginDate: "none", reservationExpireDate: "none", }
     ];
+  }
+
+  setRentingUserLogin(event: any) {
+    this.userLogin = event.target.value;
   }
 
   isBookReserved(book: BookDTO) {
@@ -83,7 +88,7 @@ export class BookManagementComponent implements OnInit {
   onReserveYesClick() {
     const reserveRequest = new ReserveBookRequestDTO();
     reserveRequest.pk = this.selectedBook.pk;
-    reserveRequest.user = "currentUser";
+    reserveRequest.user = this.userLogin;
 
     this.reservationService.reserveBook(reserveRequest).subscribe(() => {
       this.showBookReservationForm = false;
@@ -100,7 +105,7 @@ export class BookManagementComponent implements OnInit {
   onRentYesClick() {
     const rentRequest = new RentBookRequestDTO();
     rentRequest.pk = this.selectedBook.pk;
-    rentRequest.user = "TODO user";
+    rentRequest.user = this.userLogin;
 
     this.rentalService.rentBook(rentRequest).subscribe(() => {
       this.showBookRentalForm = false;
@@ -123,6 +128,6 @@ export class BookManagementComponent implements OnInit {
       this.showBookReturnForm = false;
       this.selectedBook = null;
       this.fetchBooks();
-    })
+    });
   }
 }

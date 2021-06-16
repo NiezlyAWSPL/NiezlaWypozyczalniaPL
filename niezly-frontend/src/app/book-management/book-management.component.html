@@ -32,6 +32,10 @@
             <div class="description">
                 Are you sure you want to reserve <span>{{selectedBook.title}}</span>?
             </div>
+            <div class="user-select">
+                Input renting user
+                <input (keyup)="setRentingUserLogin($event)">
+            </div>
             <div class="actions">
                 <button class="no" (click)="onReserveNoClick()">No</button>
                 <button class="yes" (click)="onReserveYesClick()">Yes</button>
@@ -43,6 +47,10 @@
         <div class="return-modal">
             <div class="description">
                 Are you sure you want to rent <span>{{selectedBook.title}}</span>?
+            </div>
+            <div class="user-select">
+                Input renting user
+                <input (keyup)="setRentingUserLogin($event)">
             </div>
             <div class="actions">
                 <button class="no" (click)="onRentNoClick()">No</button>
