@@ -25,20 +25,15 @@ export class AdminComponent implements OnInit {
     this.rentals = this.reservations = [];
   }
 
-  setBookTitle(event: any) {
-
-  }
-
   loadUserData() {
-
+    console.log(this.userLogin);
   }
 
   openManualRentalDialog() {
     this.showBookRentalForm = true;
   }
 
-  onRentalYesClick() {
-    // todo
+  onRentalYesClick(bookTitle: string) {
     this.showBookRentalForm = false;
   }
 
@@ -47,7 +42,6 @@ export class AdminComponent implements OnInit {
   }
 
   onReturnYesClick() {
-    // todo
     this.showBookReturnForm = false;
   }
 

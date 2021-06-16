@@ -51,11 +51,11 @@
         <div class="rental-modal">
             <div>
                 Input book title
-                <input (keyup)="setBookTitle($event)">
+                <input #bookTitle>
             </div>
             <div class="actions">
                 <button class="no" (click)="onRentalNoClick()">Cancel</button>
-                <button class="yes" (click)="onRentalYesClick()">Rent</button>
+                <button class="yes" (click)="onRentalYesClick(bookTitle.value)">Rent</button>
             </div>
         </div>
     </div>
