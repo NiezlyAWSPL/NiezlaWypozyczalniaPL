@@ -4,7 +4,9 @@ import com.example.booksRenting.dto.BookDefinitionDTO;
 import com.example.booksRenting.dto.bookDefinition.BookDefinitionFilterDTO;
 import com.example.booksRenting.dto.bookDefinition.CreateBookDefinitionDTO;
 import com.example.booksRenting.service.BookDefinitionService;
+import com.example.booksRenting.utils.AuthorizationUtils;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,8 +32,8 @@ public class BookDefinitionController {
     }
 
     @PostMapping("/filtered")
-    @Secured(NIEZLY_BIBLIOTEKARZ)
     public List<BookDefinitionDTO> filter(@RequestBody BookDefinitionFilterDTO filterDTO) {
+        AuthorizationUtils.assureIsNiezlyBibliotekarz();
         return bookDefinitionService.findByFilter(filterDTO);
     }
 }
