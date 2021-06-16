@@ -7,10 +7,10 @@ import {UserService} from "../service/user.service";
 
 @Component({
   selector: 'app-rentals',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  templateUrl: './reservation.component.html',
+  styleUrls: ['./reservation.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ReservationComponent implements OnInit {
 
   constructor(private router: Router,
               private rentalService: RentalService,
