@@ -136,7 +136,8 @@
 
   .return-modal-bg,
   .rental-modal-bg,
-  .cancel-reservation-modal-bg {
+  .cancel-reservation-modal-bg,
+  .add-book-modal-bg {
     position: fixed;
     top: 0;
     left: 0;
@@ -148,7 +149,8 @@
 
     .return-modal,
     .rental-modal,
-    .cancel-reservation-modal {
+    .cancel-reservation-modal,
+    .add-book-modal {
       background: #fff;
       width: 400px;
       padding: 50px;
@@ -167,7 +169,8 @@
         }
       }
 
-      input {
+      input, select {
+        width: 100%;
         padding: 4px 4px;
         margin: 4px 0;
         box-sizing: border-box;

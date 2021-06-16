@@ -5,7 +5,7 @@
         <div class="user-input">
             <div class="header">User</div>
             <div><input type="text" #v placeholder="Login" #userLogin></div>
-            <div><button (click)="loadUserData(userLogin.value)">Load data</button></div>
+            <div><button (click)="fetchUserData(userLogin.value)">Load data</button></div>
         </div>
 
         <div class="details-container">
@@ -45,6 +45,10 @@
             <button (click)="openRentalDialog()">Rent book</button>
         </div>
 
+        <div class="buttons-container">
+            <button (click)="openAddBookForm()">Add book</button>
+        </div>
+
     </div>
 
     <div class="rental-modal-bg" *ngIf="showBookRentalForm">
@@ -80,6 +84,34 @@
             <div class="actions">
                 <button class="no" (click)="onCancelReservationNoClick()">No</button>
                 <button class="yes" (click)="onCancelReservationYesClick()">Yes</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="add-book-modal-bg" *ngIf="showAddBookForm">
+        <div class="add-book-modal">
+            <table class="library-select">
+                <tr>
+                    <td>Library</td>
+                    <td>
+                        <select #newBookLibrary>
+                            <option *ngFor="let l of libraries">{{l.name}}</option>
+                        </select>
+                    </td>
+                </tr>
+                    <td>Title</td>
+                    <td><input #newBookTitle></td>
+                <tr>
+                </tr>
+                <tr>
+                    <td>Author</td>
+                    <td><input #newBookAuthor></td>
+                </tr>
+            </table>
+
+            <div class="actions">
+                <button class="no" (click)="onAddBookNoClick()">Cancel</button>
+                <button class="yes" (click)="onAddBookYesClick(newBookLibrary.value, newBookTitle.value, newBookAuthor.value)">Add</button>
             </div>
         </div>
     </div>
