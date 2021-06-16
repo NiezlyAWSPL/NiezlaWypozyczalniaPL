@@ -39,7 +39,6 @@ export class RentalService {
     }
 
     getUserOldRentals(user: string): Observable<RentalDTO[]> {
-        console.log('headers: ' + JSON.stringify(this.sessionService.getHeaders()))
         return this.http.get<RentalDTO[]>(`/api/books/rented/`,
             {
                 params: new HttpParams().set('user', user),
