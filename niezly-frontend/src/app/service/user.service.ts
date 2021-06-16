@@ -12,10 +12,7 @@ export class UserService {
     constructor(private http: HttpClient, private sessionService: SessionService) { }
 
     getUsers(loginPhase: string): Observable<UserDTO[]> {
-        return this.http.get<UserDTO[]>(`/api/users/getFilteredUsers`, {
-            params: new HttpParams().set("loginPhase", loginPhase),
-            headers: this.sessionService.getHeaders()
-        });
+        return this.http.get<UserDTO[]>(`/api/users/${loginPhase}`);
     }
     
     getCurrentUser(): Observable<UserDTO> {
