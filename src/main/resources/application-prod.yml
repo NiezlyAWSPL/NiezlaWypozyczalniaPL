@@ -1,22 +1,2 @@
-
-  reservation:
-    duration: P7D
-
-  spring:
-    security:
-      oauth2:
-        client:
-          registration:
-            cognito:
-              clientId: 4m1mdqsb1gn4pp08fmj1jodqgj
-              clientSecret: 19fl2tqkmj3m0q0i16ka1k4sppt302fbiosve683hjvhj1uhj23u
-              scope: openid
-              redirect-uri: http://localhost:8080/login/oauth2/code/cognito
-              clientName: BooksRentingApp
-              authorization-grant-type: authorization_code
-          provider:
-            cognito:
-              authorizationUri: https://niezly-books-renting.auth.us-east-1.amazoncognito.com/oauth2/authorize
-              tokenUri: https://niezly-books-renting.auth.us-east-1.amazoncognito.com/oauth2/token
-              jwkSetUri: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_fcpozvXGB/.well-known/jwks.json
-              nick-name-attribute: username
+reservation:
+  duration: P7D
