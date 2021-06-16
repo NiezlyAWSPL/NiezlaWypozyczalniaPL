@@ -12,4 +12,5 @@ public interface BookDefinitionRepository extends PagingAndSortingRepository<Boo
     Optional<BookDefinition> findByPkAndSk(String pk, String sk);
 
     Page<BookDefinition> findByPkAndSkStartsWith(String pk, String titlePrefix, Pageable pageable);
+    Page<BookDefinition> findByPk(String pk, Pageable pageable);
 }

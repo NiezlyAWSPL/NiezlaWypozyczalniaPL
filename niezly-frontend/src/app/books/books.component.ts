@@ -22,7 +22,7 @@ export class BooksComponent implements OnInit {
   selectedBook: BookDefinitionDTO;
 
   libraries: LibraryDTO[];
-  selectedLibrary: LibraryDTO;
+  selectedLibraryName: string;
 
   titlePhase: string = "";
 
@@ -43,14 +43,14 @@ export class BooksComponent implements OnInit {
   fetchLibraries() {
     this.libraryService.getAllLibraries().subscribe(libraries => {
       this.libraries = libraries;
-      this.selectedLibrary = libraries[0];
+      this.selectedLibraryName = libraries[0].name;
     });
   }
 
   fetchBooks() {
-    if (this.selectedLibrary) {
+    if (this.selectedLibraryName) {
       const bookDefinitionFilter = new BookDefinitionFilterDTO();
-      bookDefinitionFilter.libraryId = this.selectedLibrary.name;
+      bookDefinitionFilter.libraryId = this.selectedLibraryName;
       bookDefinitionFilter.skip = 0;
       bookDefinitionFilter.take = 10;
       bookDefinitionFilter.titlePrefix = this.titlePhase;
@@ -65,8 +65,8 @@ export class BooksComponent implements OnInit {
     this.selectedBook = book;
   }
 
-  onLibrarySelect(library: LibraryDTO) {
-    this.selectedLibrary = library;
+  onLibrarySelect(ev: any) {
+    this.selectedLibraryName = ev.target.value;
     this.fetchBooks();
   }
 
