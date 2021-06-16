@@ -1,1 +1,47 @@
-<p>book management works!</p>
+<div class="book-management-component">
+
+    <div class="books">
+        <div class="header">Choose a book to view available actions</div>
+
+        <div class="filter">
+            <input id="filter-books" value="{{titleStartsWith}}" type="text" #v placeholder="Filter" (input)="onFilterInput(v.value)">
+        </div>
+
+        <div class="books-container">
+            <div class="labels">
+                <div>Id</div>
+                <div class="name">Name</div>
+            </div>
+            <div class="book" *ngFor="let b of books" (click)="onBookClick(b)"
+                 [ngClass]="b == selectedBook && 'active'">
+                <div class="id">{{b.author}}</div>
+                <div class="name">{{b.title}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rent-modal-bg" *ngIf="selectedBook">
+        <div class="return-modal">
+            <div class="description">
+                Are you sure you want to rent <span>{{selectedBook.title}}.</span>?
+            </div>
+            <div class="actions">
+                <button class="no" (click)="onRentNoClick()">No</button>
+                <button class="yes" (click)="onRentYesClick()">Yes</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="return-modal-bg" *ngIf="selectedBook">
+        <div class="return-modal">
+            <div class="description">
+                Are you sure you want to return <span>{{selectedBook.title}}.</span>?
+            </div>
+            <div class="actions">
+                <button class="no" (click)="onReturnNoClick()">No</button>
+                <button class="yes" (click)="onReturnYesClick()">Yes</button>
+            </div>
+        </div>
+    </div>
+
+</div>
