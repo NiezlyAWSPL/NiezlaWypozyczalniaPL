@@ -9,5 +9,5 @@ export class HeaderConstants {
 
 export class RoleConstants {
 
-    static ROLE_LIBRARIAN = 'librarian'
+    static ROLE_LIBRARIAN = 'Librarian'
 }

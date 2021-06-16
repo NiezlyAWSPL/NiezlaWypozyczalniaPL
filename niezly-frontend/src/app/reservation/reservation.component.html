@@ -14,8 +14,18 @@
             <div class="rental" *ngFor="let r of reservations">
                 <div class="id">{{r.title}}</div>
                 <div class="name">{{r.author}}</div>
-                <div class="name">{{r.reservationBeginDate}}</div>
-                <div class="name">{{r.reservationExpireDate}}</div>
+                <div class="name">{{
+                    (r.reservationBeginDate.dayOfMonth < 10 ? '0' + r.reservationBeginDate.dayOfMonth : r.reservationBeginDate.dayOfMonth) + "."
+                    + (r.reservationBeginDate.monthValue < 10 ? '0' + r.reservationBeginDate.monthValue : r.reservationBeginDate.monthValue) + "."
+                    + r.reservationBeginDate.year + " "
+                    + (r.reservationBeginDate.hour < 10 ? '0' + r.reservationBeginDate.hour : r.reservationBeginDate.hour) + ":"
+                    + (r.reservationBeginDate.minute < 10 ? '0' + r.reservationBeginDate.minute : r.reservationBeginDate.minute)}}</div>
+                <div class="name">{{
+                    (r.reservationExpireDate.dayOfMonth < 10 ? '0' + r.reservationExpireDate.dayOfMonth : r.reservationExpireDate.dayOfMonth) + "."
+                + (r.reservationExpireDate.monthValue < 10 ? '0' + r.reservationExpireDate.monthValue : r.reservationExpireDate.monthValue) + "."
+                + r.reservationExpireDate.year + " "
+                + (r.reservationExpireDate.hour < 10 ? '0' + r.reservationExpireDate.hour : r.reservationExpireDate.hour) + ":"
+                + (r.reservationExpireDate.minute < 10 ? '0' + r.reservationExpireDate.minute : r.reservationExpireDate.minute)}}</div>
                 <div class="actions"><a (click)="onReservationCancelClick(r)">Cancel</a></div>
             </div>
         </div>

@@ -5,6 +5,6 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class RoleConstants {
 
-    public static final String NIEZLY_BIBLIOTEKARZ = "librarian";
+    public static final String NIEZLY_BIBLIOTEKARZ = "Librarian";
 
 }

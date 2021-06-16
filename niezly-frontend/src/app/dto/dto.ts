@@ -51,9 +51,18 @@ export class BookDTO {
     libraryId: string;
     userId: string;
     status: string;
-    rentedDate: string;
-    reservationBeginDate: string;
-    reservationExpireDate: string;
+    rentedDate: LocalDateTimeDTO;
+    reservationBeginDate: LocalDateTimeDTO;
+    reservationExpireDate: LocalDateTimeDTO;
+}
+
+export class LocalDateTimeDTO {
+    dayOfMonth: number;
+    hour: number;
+    minute: number;
+    monthValue: number;
+    second: number;
+    year: number;
 }
 
 export class LibraryDTO {
@@ -67,8 +76,8 @@ export class RentalDTO {
     title: string;
     libraryId: string;
     userId: string;
-    rentedDate: Date;
-    returnDate: Date;
+    rentedDate: LocalDateTimeDTO;
+    returnDate: LocalDateTimeDTO;
 }
 
 export class UserDTO {
