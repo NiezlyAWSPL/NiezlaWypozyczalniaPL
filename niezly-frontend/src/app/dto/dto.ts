@@ -71,3 +71,8 @@ export class RentalDTO {
     rentedDate: Date;
     returnDate: Date;
 }
+
+export class BookFilterDTO {
+    libraryId: string;
+    titleStartsWith: string;
+}
