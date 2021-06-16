@@ -72,11 +72,6 @@ export class RentalDTO {
     returnDate: Date;
 }
 
-export class BookFilterDTO {
-    libraryId: string;
-    titleStartsWith: string;
-}
-
 export class UserDTO {
     guid: string;
     login: string;

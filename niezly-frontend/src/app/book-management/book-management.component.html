@@ -15,13 +15,13 @@
             <div class="labels">
                 <div class="author">Author</div>
                 <div class="title">Title</div>
-                <div class="status">Status</div>
+<!--                <div class="status">Status</div>-->
                 <div class="actions">Actions</div>
             </div>
             <div class="book" *ngFor="let b of books">
                 <div class="author">{{b.author}}</div>
                 <div class="title">{{b.title}}</div>
-                <div class="status">{{b.status}}</div>
+<!--                <div class="status">{{b.status}}</div>-->
                 <div class="actions">
                     <a *ngIf="!isBookReserved(b) && !isBookRented(b)" (click)="onReserveClick(b)">Reserve</a>
                     <a *ngIf="!isBookRented(b)" (click)="onRentClick(b)">Rent</a>

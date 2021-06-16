@@ -5,7 +5,6 @@ import com.example.booksRenting.dto.book.CreateBookRequestDTO;
 import com.example.booksRenting.service.BookService;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -17,12 +16,7 @@ public class BookController {
     public BookController(BookService bookService) {
         this.bookService = bookService;
     }
-
-    @GetMapping("/xd")
-    public Principal getBook(Principal principal) {
-        return principal;
-    }
-
+    
     @GetMapping("/{id}")
     public BookDTO getBook(@PathVariable String id) {
         return bookService.findByPk(id);
@@ -40,7 +34,6 @@ public class BookController {
 
     @GetMapping("/filter/{titlePhase}")
     public List<BookDTO> getFilteredBooks(@PathVariable String titlePhase) {
-        // todo
         return List.of();
     }
 }

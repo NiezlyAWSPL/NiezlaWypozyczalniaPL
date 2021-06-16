@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {BookDTO, BookFilterDTO, RentalDTO, RentBookRequestDTO, ReturnBookRequestDTO, UserDTO} from "../dto/dto";
-import {BookService} from "../service/book.service";
+import {Component, OnInit} from '@angular/core';
+import {BookDTO, RentalDTO, UserDTO} from "../dto/dto";
 import {RentalService} from "../service/rental.service";
 import {UserService} from "../service/user.service";
 

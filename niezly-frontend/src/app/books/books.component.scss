@@ -10,14 +10,15 @@
     text-align: center;
   }
 
-  .books {
+  .books,
+  .library-select {
     padding: 20px;
     width: 100%;
     align-items: center;
     display: flex;
     flex-direction: column;
 
-    .filter {
+    .filter, select {
       width: 60%;
       margin-bottom: 20px;
 

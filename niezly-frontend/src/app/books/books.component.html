@@ -1,6 +1,12 @@
 <div class="books-component">
 
     <div class="books">
+        <div class="library-select">
+            <select [(ngModel)]="selectedLibrary" >
+                <option *ngFor="let l of libraries" (click)="onLibrarySelect(l)">{{l.name}}</option>
+            </select>
+        </div>
+        
         <div class="filter">
             <input id="filter-books" value="{{titlePhase}}" type="text" #v placeholder="Search by title" (input)="onFilterInput(v.value)">
         </div>
@@ -16,9 +22,9 @@
                  [ngClass]="b == selectedBook && 'active'">
                 <div class="author">{{b.author}}</div>
                 <div class="title">{{b.title}}</div>
-                <div class="status">{{b.status}}</div>
+<!--                <div class="status">{{b.status}}</div>-->
                 <div class="actions">
-                    <a *ngIf="b.status.includes('Available')">Reserve</a>
+                    <a>Reserve</a>
                 </div>
             </div>
         </div>

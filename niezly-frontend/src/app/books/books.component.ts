@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {BookDTO, BookFilterDTO, RentBookRequestDTO} from "../dto/dto";
+import {BookDefinitionDTO, BookDefinitionFilterDTO, LibraryDTO, RentBookRequestDTO} from "../dto/dto";
 import {BookService} from "../service/book.service";
 import {ReservationService} from "../service/reservation.service";
 import {UserService} from "../service/user.service";
+import {LibraryService} from "../service/library.service";
 
 @Component({
   selector: 'app-books',
@@ -13,18 +14,23 @@ export class BooksComponent implements OnInit {
 
   constructor(private bookService: BookService,
               private reservationService: ReservationService,
-              private userService: UserService) {
+              private userService: UserService,
+              private libraryService: LibraryService) {
   }
 
-  books: BookDTO[];
-  selectedBook: BookDTO;
+  books: BookDefinitionDTO[];
+  selectedBook: BookDefinitionDTO;
 
-  titlePhase: string;
+  libraries: LibraryDTO[];
+  selectedLibrary: LibraryDTO;
+
+  titlePhase: string = "";
 
   currentUserLogin: string;
 
   ngOnInit(): void {
     this.fetchCurrentUserLogin();
+    this.fetchLibraries();
     this.fetchBooks();
   }
 
@@ -34,23 +40,34 @@ export class BooksComponent implements OnInit {
     })
   }
 
-  fetchBooks() {
-    const bookFilter = new BookFilterDTO();
-    bookFilter.titleStartsWith = this.titlePhase;
-    bookFilter.libraryId = "LIB1";
-
-    this.bookService.getBooks(bookFilter).subscribe(books => {
-      this.books = books;
+  fetchLibraries() {
+    this.libraryService.getAllLibraries().subscribe(libraries => {
+      this.libraries = libraries;
+      this.selectedLibrary = libraries[0];
     });
-
-    // this.loadedBooks = this.books = [
-    //   { pk: "BOOK1", bookDefinitionId: "BOOKDEF1", author: "K.F.D.", title: "Instrukcja", libraryId: "LIB1", userId: "user", status: "Reserved", rentedDate: "today", reservationBeginDate: "today", reservationExpireDate: "today", },
-    //   { pk: "BOOK2", bookDefinitionId: "BOOKDEF2", author: "D.Kowal", title: "Czysty kod", libraryId: "LIB1", userId: "user", status: "Available", rentedDate: "none", reservationBeginDate: "none", reservationExpireDate: "none", }
-    // ]
   }
 
-  onBookClick(book: BookDTO) {
+  fetchBooks() {
+    if (this.selectedLibrary) {
+      const bookDefinitionFilter = new BookDefinitionFilterDTO();
+      bookDefinitionFilter.libraryId = this.selectedLibrary.name;
+      bookDefinitionFilter.skip = 0;
+      bookDefinitionFilter.take = 10;
+      bookDefinitionFilter.titlePrefix = this.titlePhase;
+
+      this.bookService.getBookDefinitions(bookDefinitionFilter).subscribe(books => {
+        this.books = books;
+      });
+    }
+  }
+
+  onBookClick(book: BookDefinitionDTO) {
     this.selectedBook = book;
+  }
+
+  onLibrarySelect(library: LibraryDTO) {
+    this.selectedLibrary = library;
+    this.fetchBooks();
   }
 
   onFilterInput(value: string) {
@@ -64,7 +81,7 @@ export class BooksComponent implements OnInit {
 
   onReserveYesClick() {
     const reserveRequest = new RentBookRequestDTO();
-    reserveRequest.pk = this.selectedBook.pk;
+    reserveRequest.pk = this.selectedBook.id;
     reserveRequest.user = this.currentUserLogin;
 
     this.reservationService.reserveBook(reserveRequest).subscribe(() => {
