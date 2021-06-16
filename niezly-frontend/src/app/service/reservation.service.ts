@@ -2,27 +2,31 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {BookDTO, ReserveBookRequestDTO} from "../dto/dto";
+import {SessionService} from "../session/session.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ReservationService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private sessionService: SessionService) { }
 
     reserveBook(request: ReserveBookRequestDTO): Observable<BookDTO> {
-        return this.http.post<BookDTO>(`/api/books/reserved`, request);
+        return this.http.post<BookDTO>(`/api/books/reserved`, request, {headers: this.sessionService.getHeaders()});
     }
 
     getReservations(user: string): Observable<BookDTO[]> {
-        return this.http.get<BookDTO[]>(`/api/books/reserved`, { params: new HttpParams().set('user', user) });
+        return this.http.get<BookDTO[]>(`/api/books/reserved`, {
+            params: new HttpParams().set('user', user),
+            headers: this.sessionService.getHeaders()
+        });
     }
 
     cancelReservation(pk: string): Observable<BookDTO> {
-        return this.http.delete<BookDTO>(`/api/books/reserved/${pk}`);
+        return this.http.delete<BookDTO>(`/api/books/reserved/${pk}`, {headers: this.sessionService.getHeaders()});
     }
 
     getFilteredReservations(titlePhase: string): Observable<BookDTO> {
-        return this.http.get<BookDTO>(`/api/books/reserved/${titlePhase}`);
+        return this.http.get<BookDTO>(`/api/books/reserved/${titlePhase}`, {headers: this.sessionService.getHeaders()});
     }
 }

@@ -32,7 +32,7 @@ export class BookService {
   }
 
   getFilteredBooks(titlePhase: string): Observable<BookDTO[]> {
-    return this.http.get<BookDTO[]>(`/api/books/filter/{${titlePhase}`);
+    return this.http.get<BookDTO[]>(`/api/books/filter/{${titlePhase}`, {headers: this.sessionService.getHeaders()});
   }
 }
 
