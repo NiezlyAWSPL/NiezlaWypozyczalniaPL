@@ -1,8 +1,9 @@
 .rentals-component {
   padding: 20px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   color: #444;
+  align-items: center;
 
   .header {
     font-size: 20px;
@@ -13,7 +14,7 @@
   .rentals,
   .reservations {
     padding: 20px;
-    width: 50%;
+    width: 80%;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -42,9 +43,19 @@
       }
     }
 
+    .rentals-container > div > div {
+      width: 33%;
+      text-align: center;
+    }
+
+    .reservations-container > div > div {
+      width: 25%;
+      text-align: center;
+    }
+
     .rentals-container,
     .reservations-container {
-      width: 90%;
+      width: 100%;
       padding: 15px;
       border-radius: 15px;
       background: #fff;

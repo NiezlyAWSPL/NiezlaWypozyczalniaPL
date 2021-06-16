@@ -8,6 +8,7 @@ import com.example.booksRenting.service.RentalService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -40,9 +41,19 @@ public class RentalController {
         return rentalService.getFilteredRentals(titlePhase);
     }
 
+    @GetMapping("/loggedUser")
+    public List<BookDTO> getCurrentRentedBookByLoggedUser(Principal principal) {
+        return rentalService.getCurrentRentedBookByUser(principal.getName());
+    }
+
     @GetMapping()
     public List<BookDTO> getCurrentRentedBookByUser(@RequestParam("user") @NotNull String user) {
         return rentalService.getCurrentRentedBookByUser(user);
+    }
+
+    @GetMapping("/loggedUser/old")
+    public List<RentalDTO> getLoggedUserOldRentals(Principal principal) {
+        return rentalService.getUserOldRentals(principal.getName());
     }
 
     @GetMapping("/old")

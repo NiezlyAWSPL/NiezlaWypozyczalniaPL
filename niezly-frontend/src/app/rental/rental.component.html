@@ -1,46 +1,39 @@
 <div class="rentals-component">
 
     <div class="rentals">
-        <div class="header">Your rentals</div>
+        <div class="header">Current Rentals</div>
 
         <div class="rentals-container">
             <div class="labels">
                 <div>Title</div>
                 <div class="name">Author</div>
+                <div class="name">Rented Date</div>
             </div>
-            <div class="rental" *ngFor="let r of rentals">
+            <div class="rental" *ngFor="let r of currentRentals">
                 <div class="id">{{r.title}}</div>
                 <div class="name">{{r.author}}</div>
+                <div class="name">{{r.rentedDate}}</div>
             </div>
         </div>
     </div>
 
     <div class="reservations">
-        <div class="header">Your reservations</div>
+        <div class="header">Rental History</div>
 
         <div class="reservations-container">
             <div class="labels">
                 <div>Title</div>
                 <div class="name">Author</div>
-                <div class="actions">Actions</div>
+                <div class="name">Rented Date</div>
+                <div class="name">Return Date</div>
             </div>
-            <div class="rental" *ngFor="let r of reservations">
+            <div class="rental" *ngFor="let r of oldRentals">
                 <div class="id">{{r.title}}</div>
                 <div class="name">{{r.author}}</div>
-                <div class="actions"><a (click)="onReservationCancelClick(r)">Cancel</a></div>
+                <div class="name">{{r.rentedDate}}</div>
+                <div class="name">{{r.returnDate}}</div>
             </div>
         </div>
     </div>
 
-    <div class="reservation-cancel-modal-bg" *ngIf="showReservationCancelModal">
-        <div class="reservation-cancel-modal">
-            <div class="description">
-                Are you sure you want to cancel reservation of <span>{{selectedReservation.title}}</span> by <span>{{selectedReservation.author}}</span>?
-            </div>
-            <div class="actions">
-                <button class="no" (click)="onReservationCancelNoClick()">No</button>
-                <button class="yes" (click)="onReservationCancelYesClick()">Yes</button>
-            </div>
-        </div>
-    </div>
 </div>

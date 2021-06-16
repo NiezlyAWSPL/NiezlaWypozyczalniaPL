@@ -24,6 +24,11 @@ public class ReservationController {
         return reservationService.reserveBook(requestDTO.getBookDefinitionId(), principal.getName());
     }
 
+    @GetMapping("/loggedUser")
+    public List<BookDTO> getLoggedUserReservations(Principal principal) {
+        return reservationService.getUserCurrentReservations(principal.getName());
+    }
+
     @GetMapping
     public List<BookDTO> getUserReservations(@RequestParam("user") @NotNull String user) {
         return reservationService.getUserCurrentReservations(user);
