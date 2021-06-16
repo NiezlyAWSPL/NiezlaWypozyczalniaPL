@@ -8,8 +8,7 @@
                 <div>Title</div>
                 <div class="name">Author</div>
             </div>
-            <div class="rental" *ngFor="let r of rentals" (click)="onRentalClick(r)"
-                 [ngClass]="r == selectedRental && 'active'">
+            <div class="rental" *ngFor="let r of rentals">
                 <div class="id">{{r.title}}</div>
                 <div class="name">{{r.author}}</div>
             </div>
@@ -28,19 +27,19 @@
             <div class="rental" *ngFor="let r of reservations">
                 <div class="id">{{r.title}}</div>
                 <div class="name">{{r.author}}</div>
-                <div class="actions"><a>Cancel</a></div>
+                <div class="actions"><a (click)="onReservationCancelClick(r)">Cancel</a></div>
             </div>
         </div>
     </div>
 
-    <div class="return-modal-bg" *ngIf="showReturnModal">
-        <div class="return-modal">
+    <div class="reservation-cancel-modal-bg" *ngIf="showReservationCancelModal">
+        <div class="reservation-cancel-modal">
             <div class="description">
-                Are you sure you want to return <span>{{selectedRental.title}}.</span>?
+                Are you sure you want to cancel reservation of <span>{{selectedReservation.title}}</span> by <span>{{selectedReservation.author}}</span>?
             </div>
             <div class="actions">
-                <button class="no" (click)="onReturnNoClick()">No</button>
-                <button class="yes" (click)="onReturnYesClick()">Yes</button>
+                <button class="no" (click)="onReservationCancelNoClick()">No</button>
+                <button class="yes" (click)="onReservationCancelYesClick()">Yes</button>
             </div>
         </div>
     </div>

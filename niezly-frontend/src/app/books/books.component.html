@@ -1,1 +1,39 @@
-<p>books works!</p>
+<div class="books-component">
+
+    <div class="books">
+        <div class="filter">
+            <input id="filter-books" value="{{titlePhase}}" type="text" #v placeholder="Search by title" (input)="onFilterInput(v.value)">
+        </div>
+
+        <div class="books-container">
+            <div class="labels">
+                <div class="author">Author</div>
+                <div class="title">Title</div>
+                <div class="status">Status</div>
+                <div class="actions">Actions</div>
+            </div>
+            <div class="book" *ngFor="let b of books" (click)="onBookClick(b)"
+                 [ngClass]="b == selectedBook && 'active'">
+                <div class="author">{{b.author}}</div>
+                <div class="title">{{b.title}}</div>
+                <div class="status">{{b.status}}</div>
+                <div class="actions">
+                    <a *ngIf="b.status.includes('Available')">Reserve</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="reserve-modal-bg" *ngIf="selectedBook">
+        <div class="reserve-modal">
+            <div class="description">
+                Are you sure you want to reserve <span>{{selectedBook.title}}</span> by <span>{{selectedBook.author}}</span>?
+            </div>
+            <div class="actions">
+                <button class="no" (click)="onReserveNoClick()">No</button>
+                <button class="yes" (click)="onReserveYesClick()">Yes</button>
+            </div>
+        </div>
+    </div>
+
+</div>

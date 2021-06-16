@@ -18,7 +18,7 @@ export class ReservationService {
         return this.http.get<BookDTO[]>(`/api/books/reserved`, { params: new HttpParams().set('user', user) });
     }
 
-    cancelReservation(pk: number): Observable<BookDTO> {
+    cancelReservation(pk: string): Observable<BookDTO> {
         return this.http.delete<BookDTO>(`/api/books/reserved/${pk}`);
     }
 
