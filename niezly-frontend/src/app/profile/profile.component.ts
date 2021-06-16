@@ -16,37 +16,44 @@ export class ProfileComponent implements OnInit {
               private reservationService: ReservationService) {
   }
 
-  loadedRentals: RentalDTO[];
   rentals: RentalDTO[];
-  selectedRental: RentalDTO;
-
   reservations: BookDTO[];
+  selectedReservation: BookDTO;
 
-  showReturnModal: boolean = false;
+  showReservationCancelModal: boolean = false;
 
   ngOnInit(): void {
     // todo proper usernames
 
     this.rentalService.getUserOldRentals("user").subscribe(rentals => {
-      this.loadedRentals = rentals;
       this.rentals = rentals;
     });
 
     this.reservationService.getReservations("user").subscribe(reservations => {
       this.reservations = reservations;
     });
+
+    this.rentals = [
+      { pk: "RENTAL1", author: "A.H.", title: "My Struggle", libraryId: "LIB1", userId: "user", rentedDate: new Date(), returnDate: new Date()}
+    ];
+
+    this.reservations = [
+      { pk: "BOOK1", bookDefinitionId: "BOOKDEF1", author: "J.P.", title: "Poradnik", libraryId: "LIB1", userId: "user", status: "Reserved", rentedDate: "today", reservationBeginDate: "today", reservationExpireDate: "today", }
+    ];
   }
 
-  onRentalClick(rental: RentalDTO) {
-    this.selectedRental = rental;
+  onReservationCancelClick(reservation: BookDTO) {
+    this.selectedReservation = reservation;
+    this.showReservationCancelModal = true;
   }
 
-  onReturnNoClick() {
-    this.showReturnModal = false;
+  onReservationCancelNoClick() {
+    this.showReservationCancelModal = false;
   }
 
-  onReturnYesClick() {
-    // todo send return request
-    this.showReturnModal = false;
+  onReservationCancelYesClick() {
+    this.reservationService.cancelReservation(this.selectedReservation.pk).subscribe(book => {
+      this.showReservationCancelModal = false;
+    });
   }
 }
