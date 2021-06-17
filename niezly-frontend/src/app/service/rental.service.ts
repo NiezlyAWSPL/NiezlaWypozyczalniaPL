@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {BookDTO, RentalDTO, RentBookRequestDTO} from "../dto/dto";
 import {Observable} from "rxjs/index";
 import {SessionService} from "../session/session.service";
+import {Constants} from "../utils/constants";
 
 class ReturnBookRequestDTO {
 }
@@ -17,28 +18,28 @@ export class RentalService {
     }
 
     rentBook(rentBookRequestDTO: RentBookRequestDTO): Observable<BookDTO> {
-        return this.http.post<BookDTO>(`/api/books/rented`, rentBookRequestDTO, {headers: this.sessionService.getHeaders()});
+        return this.http.post<BookDTO>(`${Constants.API_URL}/books/rented`, rentBookRequestDTO, {headers: this.sessionService.getHeaders()});
     }
 
     returnBook(returnBookRequestDTO: ReturnBookRequestDTO): Observable<RentalDTO> {
-        return this.http.post<RentalDTO>(`/api/books/rented/return`, returnBookRequestDTO, {headers: this.sessionService.getHeaders()});
+        return this.http.post<RentalDTO>(`${Constants.API_URL}/books/rented/return`, returnBookRequestDTO, {headers: this.sessionService.getHeaders()});
     }
 
     getCurrentRentedBookByUser(userId: string): Observable<BookDTO[]> {
-        return this.http.get<BookDTO[]>(`/api/books/rented`, {
+        return this.http.get<BookDTO[]>(`${Constants.API_URL}/books/rented`, {
             params: new HttpParams().set('user', userId),
             headers: this.sessionService.getHeaders()
         });
     }
 
     getCurrentRentedBooksByLoggedUser(): Observable<BookDTO[]> {
-        return this.http.get<BookDTO[]>(`/api/books/rented/loggedUser`, {
+        return this.http.get<BookDTO[]>(`${Constants.API_URL}/books/rented/loggedUser`, {
             headers: this.sessionService.getHeaders()
         });
     }
 
     getLoggedUserOldRentals(): Observable<RentalDTO[]> {
-        return this.http.get<RentalDTO[]>(`/api/books/rented/loggedUser/old`,
+        return this.http.get<RentalDTO[]>(`${Constants.API_URL}/books/rented/loggedUser/old`,
             {
                 headers: this.sessionService.getHeaders()
             }
@@ -46,7 +47,7 @@ export class RentalService {
     }
 
     getUserOldRentals(user: string): Observable<RentalDTO[]> {
-        return this.http.get<RentalDTO[]>(`/api/books/rented/old`,
+        return this.http.get<RentalDTO[]>(`${Constants.API_URL}/books/rented/old`,
             {
                 params: new HttpParams().set('user', user),
                 headers: this.sessionService.getHeaders()
