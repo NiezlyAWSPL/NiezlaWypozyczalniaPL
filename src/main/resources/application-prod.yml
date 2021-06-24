@@ -6,11 +6,11 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_fcpozvXGB
+          issuer-uri: https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_rFViaC5CP
 com:
   example:
     security:
       jwt:
         aws:
-          userPoolId: us-east-1_fcpozvXGB
-          region: "us-east-1"
+          userPoolId: eu-central-1_rFViaC5CP
+          region: "eu-central-1"

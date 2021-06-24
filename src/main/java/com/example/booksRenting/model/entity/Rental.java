@@ -20,14 +20,6 @@ public class Rental extends BaseEntity{
     }
 
     @DynamoDBAttribute
-    @DynamoDBIndexHashKey(globalSecondaryIndexName = "bookDefinitionId")
-    private String bookDefinitionId;
-
-    @DynamoDBAttribute
-    @DynamoDBIndexRangeKey(globalSecondaryIndexName = "bookDefinitionId")
-    private String statusReservationExpireDate;
-
-    @DynamoDBAttribute
     private String title;
 
     @DynamoDBAttribute
