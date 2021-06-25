@@ -14,10 +14,12 @@ export class MenuComponent implements OnInit {
   constructor( private userService: UserService) {
   }
 
+  isLoggedIn = false;
 
   ngOnInit() {
     this.userService.getCurrentUser().subscribe(u => {
       this.loggedUserAuthorities = u.authorities;
+      this.isLoggedIn = true;
     })
   }
 

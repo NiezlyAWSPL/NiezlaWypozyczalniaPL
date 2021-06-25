@@ -3,7 +3,8 @@
         <div class="topMenu__header">
             <i class="fas fa-bicycle" style="margin-right: 12px"></i>
             <h1>Books renting</h1>
-            <a class="login-uri" href="{{loginUri}}">Login</a>
+            <a *ngIf="!isLoggedIn" class="login-uri" href="{{loginUri}}">Login</a>
+            <a *ngIf="isLoggedIn" class="login-uri" (click)="logoutClick()">Logout</a>
         </div>
     </div>
     <div class="ui-g-12 ui-md-2 app-menu">

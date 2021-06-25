@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -27,7 +29,7 @@ public class UserController {
     @GetMapping("/current")
     public UserDTO getCurrentUser(Principal principal) {
         return UserDTO.builder()
-                .authorities(AuthorizationUtils.getLoggedUserAuthorities(principal))
+                .authorities(Optional.ofNullable(AuthorizationUtils.getLoggedUserAuthorities(principal)).orElse(Collections.emptyList()))
                 .build();
     }
 

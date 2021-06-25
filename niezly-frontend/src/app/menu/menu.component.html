@@ -1,4 +1,4 @@
-<div class="menu" *ngIf="loggedUserAuthorities?.length > 0">
+<div class="menu" *ngIf="isLoggedIn">
     <a routerLink="/start/books" routerLinkActive="active" class="menu__link">Books</a>
     <a routerLink="/start/rentals" routerLinkActive="active" class="menu__link">Rentals</a>
     <a routerLink="/start/reservations" routerLinkActive="active" class="menu__link">Reservations</a>
