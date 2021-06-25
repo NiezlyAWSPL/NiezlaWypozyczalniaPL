@@ -19,7 +19,7 @@ public class AuthorizationUtils {
         SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
                 .filter(a -> a.getAuthority().contains(NIEZLY_BIBLIOTEKARZ))
                 .findFirst()
-                .orElseThrow(() -> new NotABibliotekarzException("Totally not a kurwa bibliotekarz B)"));
+                .orElseThrow(() -> new NotABibliotekarzException("Totally not a bibliotekarz B)"));
     }
 
     public static final List<String> getLoggedUserAuthorities(Principal principal) {
